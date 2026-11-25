@@ -412,7 +412,7 @@ async function show(id){
   const isDraft=entry?.published===false;
   setDraftIndexing(isDraft);
   if(!entry){
-    article.innerHTML='<h1>Week not found</h1><p>Please choose a week above.</p>';
+    article.innerHTML='<h1>Week not found</h1><p>Please choose a sermon from All Sermons.</p>';
     setupSlides();
     return;
   }
@@ -659,38 +659,57 @@ function setupPermalink(id){
   };
 }
 
-const archive=document.getElementById('archive');
-const archiveToggle=document.getElementById('archive-toggle');
-function setArchive(open){
-  archive.hidden=!open;
-  archiveToggle.setAttribute('aria-expanded',String(open));
-  archiveToggle.setAttribute('aria-label',open?'Hide all sermons':'Show all sermons');
-}
-archiveToggle.onclick=()=>setArchive(archive.hidden);
-archive.addEventListener('keydown',event=>{
-  if(event.key==='Escape'){
-    setArchive(false);
-    archiveToggle.focus();
+const archive = document.getElementById('archive');
+const archiveDialog = document.getElementById('sermon-archive');
+const archiveToggle = document.getElementById('archive-toggle');
+function setArchive(open) {
+  if (open && !archiveDialog.open) {
+    closeSeriesTooltip();
+    archiveDialog.showModal();
+    archiveToggle.setAttribute('aria-expanded', 'true');
+    const current = archive.querySelector('[aria-current="true"]');
+    if (current) {
+      current.focus({ preventScroll: true });
+      current.scrollIntoView({ block: 'nearest' });
+    }
+  } else if (!open && archiveDialog.open) {
+    archiveDialog.close();
   }
+}
+archiveToggle.onclick = () => setArchive(!archiveDialog.open);
+document.getElementById('archive-close').onclick = () => setArchive(false);
+archiveDialog.addEventListener('click', event => {
+  const bounds = archiveDialog.getBoundingClientRect();
+  if (event.target === archiveDialog && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) setArchive(false);
+});
+archiveDialog.addEventListener('close', () => {
+  archiveToggle.setAttribute('aria-expanded', 'false');
+  archiveToggle.focus();
 });
 
-function setupArchive(){
-  const shortDate=new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric'});
-  document.getElementById('weeks').innerHTML=listedWeeks.slice(0,4).map(w=>
-    `<a class="week" href="?week=${encodeURIComponent(w.id)}" data-id="${esc(w.id)}" aria-label="${esc(date(w.date))}" aria-current="false">${esc(shortDate.format(new Date(w.date+'T12:00:00')))}</a>`
-  ).join('');
-  archive.innerHTML=listedWeeks.map(w=>
-    `<a class="week" href="?week=${encodeURIComponent(w.id)}" data-id="${esc(w.id)}" aria-current="false">${esc(date(w.date))}<span>${esc(w.title)}${w.speaker ? ' • ' + esc(w.speaker) : ''}</span></a>`
-  ).join('');
-  document.querySelectorAll('.week').forEach(link=>{
-    link.onclick=event=>{
-      if(event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
+function sermonArchiveEntry(guide) {
+  const seriesName = seriesById.get(guide.series)?.name;
+  const series = seriesName
+    ? '<em class="archive-series">' + esc(seriesName) + (guide.partLabel ? ', ' + esc(guide.partLabel) : '') + '</em>'
+    : '';
+  const title = guide.sermonTitle || guide.title;
+  const metadata = seriesPartDate(guide.date) + (guide.speaker ? ' • ' + guide.speaker : '');
+  return `<a class="week" href="?week=${encodeURIComponent(guide.id)}" data-id="${esc(guide.id)}" aria-current="false"><strong class="archive-sermon-title">${esc(title)}</strong>${series}<span class="archive-metadata">${esc(metadata)}</span></a>`;
+}
+function setupArchive() {
+  archive.innerHTML = listedWeeks.map(sermonArchiveEntry).join('');
+  archive.querySelectorAll('.week').forEach(link => {
+    link.onclick = async event => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
       event.preventDefault();
-      history.pushState(null,'',link.getAttribute('href'));
-      show(link.dataset.id);
-      if(!archive.hidden){
-        setArchive(false);
-        archiveToggle.focus();
+      history.pushState(null, '', link.getAttribute('href'));
+      setArchive(false);
+      await show(link.dataset.id);
+      const heading = document.querySelector('#article h1');
+      if (heading) {
+        heading.tabIndex = -1;
+        heading.focus({ preventScroll: true });
+        heading.scrollIntoView({ block: 'start' });
       }
     };
   });
