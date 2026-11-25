@@ -428,6 +428,63 @@ async function show(id){
   if(request!==navigation)return;
   renderGuide({...guide,...entry},isDraft);
 }
+// Compact metadata for series badges; other dates keep their full formatting.
+function seriesPartDate(value, currentYear = new Date().getFullYear()) {
+  const date = new Date(value + 'T12:00:00');
+  const options = { month: 'short', day: 'numeric' };
+  if (date.getFullYear() !== currentYear) options.year = 'numeric';
+  return new Intl.DateTimeFormat('en-US', options).format(date);
+}
+
+let activeSeriesTooltip;
+let seriesTooltipCloseTimer;
+function closeSeriesTooltip() {
+  clearTimeout(seriesTooltipCloseTimer);
+  activeSeriesTooltip?.classList.remove('show-tooltip');
+  activeSeriesTooltip = undefined;
+}
+function showSeriesTooltip(wrapper) {
+  closeSeriesTooltip();
+  if (!wrapper) return;
+  const tooltip = wrapper.querySelector('.series-part-tooltip');
+  const badge = wrapper.querySelector('.series-part');
+  wrapper.classList.add('show-tooltip');
+  const bounds = badge.getBoundingClientRect();
+  const width = tooltip.getBoundingClientRect().width;
+  const height = tooltip.getBoundingClientRect().height;
+  const left = Math.max(8, Math.min(bounds.left, window.innerWidth - width - 8));
+  const below = bounds.bottom + 8;
+  const top = below + height <= window.innerHeight - 8
+    ? below : Math.max(8, bounds.top - height - 8);
+  tooltip.style.left = left + 'px';
+  tooltip.style.top = top + 'px';
+  activeSeriesTooltip = wrapper;
+}
+document.addEventListener('pointerover', event => {
+  if (event.pointerType === 'touch') return;
+  const wrapper = event.target.closest('.series-part-wrap');
+  if (wrapper) clearTimeout(seriesTooltipCloseTimer);
+  if (wrapper && !wrapper.contains(event.relatedTarget) && wrapper !== activeSeriesTooltip) showSeriesTooltip(wrapper);
+});
+document.addEventListener('pointerout', event => {
+  const wrapper = event.target.closest('.series-part-wrap');
+  if (wrapper && !wrapper.contains(event.relatedTarget)) seriesTooltipCloseTimer = setTimeout(closeSeriesTooltip, 150);
+});
+document.addEventListener('focusin', event => {
+  const wrapper = event.target.closest('.series-part-wrap');
+  if (wrapper) showSeriesTooltip(wrapper);
+  else closeSeriesTooltip();
+});
+document.addEventListener('focusout', event => {
+  const wrapper = event.target.closest('.series-part-wrap');
+  if (wrapper && !wrapper.contains(event.relatedTarget)) closeSeriesTooltip();
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') closeSeriesTooltip();
+});
+window.addEventListener('scroll', closeSeriesTooltip, { passive: true });
+window.addEventListener('resize', closeSeriesTooltip);
+
 function sermonHeading(guide) {
   const seriesName = seriesById.get(guide.series)?.name;
   if (!seriesName || !guide.partLabel || !guide.sermonTitle) {
@@ -438,12 +495,15 @@ function sermonHeading(guide) {
   if (!guide.published) parts.push(guide);
   parts.sort((a, b) => a.date.localeCompare(b.date));
 
-  const badges = parts.map(part => {
+  const badges = parts.map((part, index) => {
     const label = esc(part.partLabel);
-    if (part.id === guide.id) {
-      return `<span class="series-part" aria-current="page">${label}</span>`;
-    }
-    return `<a class="series-part" href="?week=${encodeURIComponent(part.id)}" aria-label="${label}: ${esc(part.sermonTitle)}">${label}</a>`;
+    const tooltipId = 'series-part-info-' + index;
+    const info = esc(seriesPartDate(part.date)) + (part.speaker ? ' • ' + esc(part.speaker) : '');
+    const attributes = `aria-describedby="${tooltipId}" aria-label="${label}: ${esc(part.sermonTitle)}"`;
+    const badge = part.id === guide.id
+      ? `<span class="series-part" aria-current="page" tabindex="0" ${attributes}>${label}</span>`
+      : `<a class="series-part" href="?week=${encodeURIComponent(part.id)}" ${attributes}>${label}</a>`;
+    return `<span class="series-part-wrap">${badge}<span class="series-part-tooltip" id="${tooltipId}" role="tooltip"><strong>${esc(part.sermonTitle)}</strong><span>${info}</span></span></span>`;
   }).join('');
   return `
     <nav class="series-nav" aria-label="${esc(seriesName)} series">

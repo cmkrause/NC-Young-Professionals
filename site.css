@@ -1204,3 +1204,42 @@ body:has(#reading-settings[open]) { overflow: hidden; }
 
 .size-options button { display: grid; place-items: center; }
 .size-options button svg { width: 20px; height: 20px; }
+
+/* Series metadata stays compact without changing badge navigation. */
+.series-part-wrap {
+  display: inline-flex;
+}
+.series-part-tooltip {
+  display: none;
+  position: fixed;
+  z-index: 30;
+  width: max-content;
+  max-width: min(280px, calc(100vw - 16px));
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: 0 3px 12px #0002;
+  font-size: 14px;
+  line-height: 1.4;
+  font-style: normal;
+  font-weight: 400;
+  text-align: left;
+  white-space: normal;
+}
+.series-part-tooltip strong,
+.series-part-tooltip > span {
+  display: block;
+}
+.series-part-tooltip > span {
+  margin-top: 3px;
+  color: var(--muted);
+}
+.series-part-wrap.show-tooltip .series-part-tooltip {
+  display: block;
+}
+.series-part[tabindex]:focus-visible {
+  outline: 3px solid var(--link);
+  outline-offset: 3px;
+}
