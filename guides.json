@@ -71,6 +71,17 @@
       "file": "guides/2026-11-15.json",
       "series": "up-here",
       "speaker": "Darrin Cantrell"
+    },
+    {
+      "id": "2026-11-22",
+      "date": "2026-11-22",
+      "title": "Up Here, Part 4: Mount Stupid",
+      "partLabel": "Part 4",
+      "sermonTitle": "Mount Stupid",
+      "published": false,
+      "file": "guides/2026-11-22.json",
+      "series": "up-here",
+      "speaker": "Forrest Jenan"
     }
   ]
 }
