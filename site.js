@@ -509,7 +509,7 @@ function sermonHeading(guide) {
   }).join('');
   return `
     <nav class="series-nav" aria-label="${esc(seriesName)} series">
-      <span class="series-name">${esc(seriesName)}</span>
+      <a class="series-name" href="?series=${encodeURIComponent(guide.series)}">${esc(seriesName)}</a>
       ${badges}
     </nav>
     <h1>${esc(guide.sermonTitle)}</h1>`;
@@ -719,27 +719,34 @@ function setupArchive() {
 
 
 let speakerObserver;
-function speakerSermonEntry(entry) {
+function collectionSermonEntry(entry) {
   const series = seriesById.get(entry.series)?.name;
   return `<section class="speaker-sermon" data-guide-id="${esc(entry.id)}">
     <h2><a href="?week=${encodeURIComponent(entry.id)}">${esc(entry.sermonTitle || entry.title)}</a></h2>
-    ${series ? `<p class="speaker-series"><em>${esc(series)}${entry.partLabel ? ', ' + esc(entry.partLabel) : ''}</em></p>` : ''}
-    <p class="speaker-date">${esc(date(entry.date))}</p>
+    ${series ? `<p class="speaker-series"><em><a href="?series=${encodeURIComponent(entry.series)}">${esc(series)}</a>${entry.partLabel ? ', ' + esc(entry.partLabel) : ''}</em></p>` : ''}
+    <p class="speaker-date">${entry.speaker ? `<a class="speaker-link" href="?speaker=${encodeURIComponent(entry.speaker)}">${esc(entry.speaker)}</a> • ` : ''}${esc(date(entry.date))}</p>
     <div class="speaker-sermon-body"><div class="speaker-description"><p role="status">Loading description…</p></div></div>
   </section>`;
 }
-async function showSpeaker(name) {
+function showSpeaker(name) {
+  return showSermonCollection('Sermons by ' + name, entry => entry.speaker === name, 'speaker');
+}
+function showSeries(id) {
+  const name = seriesById.get(id)?.name;
+  return showSermonCollection(name || 'Series not found', entry => Boolean(name) && entry.series === id, 'series');
+}
+async function showSermonCollection(title, matches, kind) {
   const request = ++navigation;
   speakerObserver?.disconnect();
   closeSeriesTooltip();
   setDraftIndexing(false);
   const article = document.getElementById('article');
   article.onclick = null;
-  document.title = 'Sermons by ' + name + ' · NC Young Professionals';
+  document.title = title + ' · NC Young Professionals';
   document.querySelectorAll('.week').forEach(link => link.setAttribute('aria-current', 'false'));
-  const entries = listedWeeks.filter(entry => entry.speaker === name);
-  article.innerHTML = `<h1 class="speaker-heading">Sermons by ${esc(name)}</h1>
-    ${entries.length ? entries.map(speakerSermonEntry).join('') : '<p>No published sermons found for this speaker.</p>'}`;
+  const entries = listedWeeks.filter(matches);
+  article.innerHTML = `<h1 class="speaker-heading">${esc(title)}</h1>
+    ${entries.length ? entries.map(collectionSermonEntry).join('') : '<p>No published sermons found for this ' + kind + '.</p>'}`;
   setupSlides();
   // Fetch only nearby cards, with bounded concurrency even for a large archive.
   const queue = [];
@@ -793,6 +800,7 @@ async function showSpeaker(name) {
 function showRequestedGuide(){
   const params = new URLSearchParams(location.search);
   if (params.has('speaker')) return showSpeaker(params.get('speaker'));
+  if (params.has('series')) return showSeries(params.get('series'));
   speakerObserver?.disconnect();
   return show(params.get('week'));
 }
