@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<base href="../">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Site File Viewer · NC Young Professionals</title>
+<style>
+  :root{color-scheme:light dark}
+  body{margin:0;background:Canvas;color:CanvasText;font:1rem/1.5 system-ui,sans-serif}
+  main{width:min(100% - 2rem,58rem);margin:2rem auto}
+  h1{margin:0 0 1rem;font-size:1.6rem}
+  label{display:block;font-weight:600;margin-bottom:.35rem}
+  select,button{font:inherit;padding:.35rem .55rem}
+  select{width:100%}
+  .actions{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0}
+  #viewer{border:1px solid GrayText;border-radius:.5rem;padding:.75rem;font: .9rem/1.6 ui-monospace,monospace;overflow-wrap:anywhere}
+  summary{cursor:pointer}
+  summary small{color:GrayText}
+  .children{padding-inline-start:1rem;border-inline-start:1px solid GrayText}
+  .key{font-weight:700}
+  .value,.source-code{white-space:pre-wrap}
+  .source-code{margin:0;font:inherit}
+  .token-comment{color:#586458}
+  .token-string{color:#8a321e}
+  .token-keyword{color:#59308f;font-weight:600}
+  .token-number{color:#19578c}
+  @media(prefers-color-scheme:dark){
+    .token-comment{color:#aab6aa}
+    .token-string{color:#f0ac91}
+    .token-keyword{color:#d6afff}
+    .token-number{color:#9dccf6}
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Site File Viewer</h1>
+  <label for="file">Choose a site file</label>
+  <select id="file" disabled></select>
+  <div class="actions">
+    <button type="button" id="expand" disabled>Expand all</button>
+    <button type="button" id="collapse" disabled>Collapse all</button>
+  </div>
+  <p id="status" role="status"></p>
+  <section id="viewer" aria-label="File contents" hidden></section>
+</main>
+<script>
+const picker=document.getElementById('file');
+const status=document.getElementById('status');
+const viewer=document.getElementById('viewer');
+const expand=document.getElementById('expand');
+const collapse=document.getElementById('collapse');
+let selection=0;
+
+async function readJson(path){
+  const response=await fetch(path);
+  if(!response.ok)throw Error('HTTP '+response.status);
+  return response.json();
+}
+
+function render(value,key,root=false){
+  const label=document.createElement('span');
+  label.className='key';
+  label.textContent=key===undefined?'':JSON.stringify(key)+': ';
+  if(value===null||typeof value!=='object'){
+    const line=document.createElement('div');
+    const literal=document.createElement('span');
+    literal.className='value';
+    literal.textContent=JSON.stringify(value);
+    line.append(label,literal);
+    return line;
+  }
+
+  const array=Array.isArray(value);
+  const entries=Object.entries(value);
+  const details=document.createElement('details');
+  details.open=root;
+  const summary=document.createElement('summary');
+  const count=document.createElement('small');
+  count.textContent=' '+entries.length+(array?' items':' keys');
+  summary.append(label,array?'[':'{',count);
+  const children=document.createElement('div');
+  children.className='children';
+  entries.forEach(([name,item],index)=>{
+    const node=render(item,array?undefined:name);
+    if(index<entries.length-1)node.append(',');
+    children.append(node);
+  });
+  details.append(summary,children,array?']':'}');
+  return details;
+}
+
+function renderSource(source,isCss){
+  const code=document.createElement('pre');
+  code.className='source-code';
+  const tokens=isCss
+    ? /\/\*[\s\S]*?\*\/|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|#[\da-f]{3,8}\b|\b\d+(?:\.\d+)?|[-\w]+(?=\s*:)/gi
+    : /\/\*[\s\S]*?\*\/|\/\/[^\n]*|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`|\b(?:async|await|catch|const|else|false|for|function|if|let|new|null|return|throw|true|try|undefined)\b|\b\d+(?:\.\d+)?/g;
+  let cursor=0;
+  for(const match of source.matchAll(tokens)){
+    const value=match[0];
+    const token=document.createElement('span');
+    const kind=value.startsWith('/')?'comment':/^["'`]/.test(value)?'string':/^[#\d]/.test(value)?'number':'keyword';
+    token.className='token-'+kind;
+    token.textContent=value;
+    code.append(source.slice(cursor,match.index),token);
+    cursor=match.index+value.length;
+  }
+  code.append(source.slice(cursor));
+  return code;
+}
+
+async function showFile(){
+  const request=++selection;
+  const path=picker.value;
+  viewer.replaceChildren();
+  viewer.hidden=true;
+  expand.disabled=collapse.disabled=true;
+  status.textContent='Loading '+path+'…';
+  try{
+    const isJson=path.endsWith('.json');
+    const response=await fetch(path);
+    if(!response.ok)throw Error('HTTP '+response.status);
+    const data=await (isJson?response.json():response.text());
+    if(request!==selection)return;
+    viewer.append(isJson?render(data,undefined,true):renderSource(data,path.endsWith('.css')));
+    viewer.hidden=false;
+    expand.disabled=collapse.disabled=!isJson;
+    status.textContent=path;
+  }catch(error){
+    if(request===selection)status.textContent='Could not load '+path+' ('+error.message+').';
+  }
+}
+
+picker.addEventListener('change',showFile);
+expand.addEventListener('click',()=>{
+  viewer.querySelectorAll('details').forEach(node=>{node.open=true});
+});
+collapse.addEventListener('click',()=>{
+  viewer.querySelectorAll('details').forEach(node=>{node.open=false});
+});
+
+async function start(){
+  const files=new Map([['./guides.json','guides.json'],['./translations.json','translations.json']]);
+  try{
+    const index=await readJson('./guides.json');
+    for(const guide of index.guides){
+      files.set('./'+guide.file,guide.file+' · '+guide.title+(guide.published?'':' (unlisted)'));
+    }
+  }catch(error){
+    console.error('Could not discover guide files',error);
+  }
+  files.set('./site.js','site.js · JavaScript');
+  files.set('./site.css','site.css · CSS');
+  for(const [path,label] of files)picker.add(new Option(label,path));
+  picker.disabled=false;
+  showFile();
+}
+start();
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "sources": {
+    "bestsellers": "https://readgoodbooks.com/bestseller/bible-translations/",
+    "bestsellerEdition": "October 2026",
+    "youVersionApi": "https://developers.youversion.com/api/bibles",
+    "youVersionVersionCatalog": "https://www.bible.com/versions"
+  },
+  "default": "NIV",
+  "translations": [
+    { "abbreviation": "CSB", "id": 1713, "name": "Christian Standard Bible" },
+    { "abbreviation": "EASY", "id": 2079, "name": "EasyEnglish Bible 2024" },
+    { "abbreviation": "ESV", "id": 59, "name": "English Standard Version 2025" },
+    { "abbreviation": "KJV", "id": 1, "name": "King James Version" },
+    { "abbreviation": "NASB2020", "id": 2692, "name": "New American Standard Bible 2020" },
+    { "abbreviation": "NIrV", "id": 110, "name": "New International Reader’s Version" },
+    { "abbreviation": "NIV", "id": 111, "name": "New International Version" },
+    { "abbreviation": "NKJV", "id": 114, "name": "New King James Version" },
+    { "abbreviation": "NLT", "id": 116, "name": "New Living Translation" },
+    { "abbreviation": "NRSVUE", "id": 3523, "name": "New Revised Standard Version Updated Edition 2021" }
+  ]
+}

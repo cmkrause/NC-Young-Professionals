@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><style>:root{--icon-fg:#262626;--icon-bg:#fafafa}@media(prefers-color-scheme:dark){:root{--icon-fg:#eeeeee;--icon-bg:#1c1c1c}}</style>
+
+<path d="M25 5h27a8 8 0 0 1 8 8v19a8 8 0 0 1-5 7v10l-13-8H25a8 8 0 0 1-8-8V13a8 8 0 0 1 8-8Z" fill="var(--icon-bg)" stroke="var(--icon-fg)" stroke-width="4" stroke-linejoin="round"/>
+<g transform="translate(0 3) scale(.94)">
+<path d="M12 19h29a8 8 0 0 1 8 8v19a8 8 0 0 1-8 8H22L9 61v-9a8 8 0 0 1-5-7V27a8 8 0 0 1 8-8Z" fill="var(--icon-fg)" stroke="var(--icon-fg)" stroke-width="4" stroke-linejoin="round"/>
+<path d="M27 28v18m-7-12h14" fill="none" stroke="var(--icon-bg)" stroke-width="4" stroke-linecap="square"/>
+</g></svg>

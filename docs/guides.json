@@ -1,0 +1,76 @@
+{
+  "series": {
+    "up-here": {
+      "name": "Up Here",
+      "slideBackground": [
+        {
+          "width": 768,
+          "src": "./slides/mountain-background-768.webp"
+        },
+        {
+          "width": 1280,
+          "src": "./slides/mountain-background-1280.webp"
+        },
+        {
+          "width": 2048,
+          "src": "./slides/mountain-background.webp"
+        }
+      ]
+    },
+    "ephesians": {
+      "name": "Ephesians"
+    }
+  },
+  "guides": [
+    {
+      "id": "2026-10-25",
+      "date": "2026-10-25",
+      "title": "Ephesians, Chapter 6: Authority Issues",
+      "partLabel": "Chapter 6",
+      "sermonTitle": "Authority Issues",
+      "published": true,
+      "file": "guides/2026-10-25.json",
+      "series": "ephesians",
+      "speaker": "Brian Ross"
+    },
+    {
+      "id": "2026-11-01",
+      "date": "2026-11-01",
+      "title": "Up Here, Part 1: Meeting God on the Mountain",
+      "partLabel": "Part 1",
+      "sermonTitle": "Meeting God on the Mountain",
+      "published": true,
+      "aliases": [
+        "2026-11-02"
+      ],
+      "file": "guides/2026-11-01.json",
+      "series": "up-here",
+      "speaker": "Forrest Jenan"
+    },
+    {
+      "id": "2026-11-08",
+      "date": "2026-11-08",
+      "title": "Up Here, Part 2: Free Indeed",
+      "partLabel": "Part 2",
+      "sermonTitle": "Free Indeed",
+      "published": true,
+      "file": "guides/e05ae22ccf2b1223d950bd7768121521.json",
+      "series": "up-here",
+      "speaker": "Brian Ross",
+      "aliases": [
+        "e05ae22ccf2b1223d950bd7768121521"
+      ]
+    },
+    {
+      "id": "2026-11-15",
+      "date": "2026-11-15",
+      "title": "Up Here, Part 3: Before Everything Gets Fixed",
+      "partLabel": "Part 3",
+      "sermonTitle": "Before Everything Gets Fixed",
+      "published": true,
+      "file": "guides/2026-11-15.json",
+      "series": "up-here",
+      "speaker": "Darrin Cantrell"
+    }
+  ]
+}
