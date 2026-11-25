@@ -1321,3 +1321,22 @@ body:has(#sermon-archive[open]) .header-archive::after { display: none; }
 }
 #sermon-archive .week:hover,
 #sermon-archive .week:focus-visible { background: var(--selected); }
+
+/* Speaker archives use text-only cards on small screens. */
+.speaker-link { color: inherit; }
+.speaker-heading { margin-top: 24px; }
+.speaker-sermon { padding: 20px 0; border-bottom: 1px solid var(--line); }
+.speaker-sermon h2 { margin: 0 0 4px; font-size: 1.2em; }
+.speaker-sermon h2 a { text-decoration: none; }
+.speaker-sermon h2 a:hover { text-decoration: underline; }
+.speaker-series, .speaker-date { margin: 2px 0; color: var(--muted); font-size: .9em; }
+.speaker-sermon-body { margin-top: 12px; }
+.speaker-description p { margin: 0 0 10px; }
+.speaker-description p:last-child { margin-bottom: 0; }
+.speaker-thumbnail { display: none; }
+@media (min-width: 701px) {
+  .speaker-sermon-body { display: flex; align-items: flex-start; gap: 18px; }
+  .speaker-thumbnail { display: block; flex: 0 0 220px; border-radius: 6px; overflow: hidden; }
+  .speaker-thumbnail img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+  .speaker-description { flex: 1; min-width: 0; }
+}

@@ -94,9 +94,11 @@ smaller.onclick = () => resizeText(-10);
 larger.onclick = () => resizeText(10);
 matchMedia('(max-width:500px)').addEventListener('change', setReadingSize);
 
+const descriptionHtml = paragraph => esc(paragraph).replace(/\*([^*]+)\*/g, '<em>$1</em>');
+
 function teaser(paragraphs) {
   if (!paragraphs.length) return '';
-  const format = paragraph => esc(paragraph).replace(/\*([^*]+)\*/g, '<em>$1</em>');
+  const format = descriptionHtml;
   const rest = paragraphs.slice(1).map(paragraph => '<p>' + format(paragraph) + '</p>').join('');
   return `
     <details class="teaser" open>
@@ -518,7 +520,7 @@ function guideHeader(guide, isDraft) {
     ${isDraft ? '<p class="draft-status">Unlisted draft</p>' : ''}
     ${sermonHeading(guide)}
     <div class="date-share">
-      <p class="subtitle">${guide.speaker ? esc(guide.speaker) + ' • ' : ''}${esc(date(guide.date))}</p>
+      <p class="subtitle">${guide.speaker ? '<a class="speaker-link" href="?speaker=' + encodeURIComponent(guide.speaker) + '">' + esc(guide.speaker) + '</a> • ' : ''}${esc(date(guide.date))}</p>
       <span class="permalink-separator" aria-hidden="true">•</span>
       <button class="copy-link" id="copy-link" aria-label="Copy link to this week" title="Copy link to this week">
         <span aria-hidden="true">🔗</span>
@@ -715,8 +717,84 @@ function setupArchive() {
   });
 }
 
+
+let speakerObserver;
+function speakerSermonEntry(entry) {
+  const series = seriesById.get(entry.series)?.name;
+  return `<section class="speaker-sermon" data-guide-id="${esc(entry.id)}">
+    <h2><a href="?week=${encodeURIComponent(entry.id)}">${esc(entry.sermonTitle || entry.title)}</a></h2>
+    ${series ? `<p class="speaker-series"><em>${esc(series)}${entry.partLabel ? ', ' + esc(entry.partLabel) : ''}</em></p>` : ''}
+    <p class="speaker-date">${esc(date(entry.date))}</p>
+    <div class="speaker-sermon-body"><div class="speaker-description"><p role="status">Loading description…</p></div></div>
+  </section>`;
+}
+async function showSpeaker(name) {
+  const request = ++navigation;
+  speakerObserver?.disconnect();
+  closeSeriesTooltip();
+  setDraftIndexing(false);
+  const article = document.getElementById('article');
+  article.onclick = null;
+  document.title = 'Sermons by ' + name + ' · NC Young Professionals';
+  document.querySelectorAll('.week').forEach(link => link.setAttribute('aria-current', 'false'));
+  const entries = listedWeeks.filter(entry => entry.speaker === name);
+  article.innerHTML = `<h1 class="speaker-heading">Sermons by ${esc(name)}</h1>
+    ${entries.length ? entries.map(speakerSermonEntry).join('') : '<p>No published sermons found for this speaker.</p>'}`;
+  setupSlides();
+  // Fetch only nearby cards, with bounded concurrency even for a large archive.
+  const queue = [];
+  let active = 0;
+  async function loadCard(card) {
+    const entry = entries.find(entry => entry.id === card.dataset.guideId);
+    try {
+      const guide = await loadGuide(entry.file);
+      if (request !== navigation) return;
+      card.querySelector('.speaker-description').innerHTML = (guide.description || []).map(
+        paragraph => '<p>' + descriptionHtml(paragraph) + '</p>'
+      ).join('');
+      if (/^[A-Za-z0-9_-]{11}$/.test(guide.videoId || '')) {
+        const thumbnail = document.createElement('a');
+        thumbnail.className = 'speaker-thumbnail';
+        thumbnail.href = '?week=' + encodeURIComponent(entry.id);
+        thumbnail.setAttribute('aria-label', 'Open ' + (entry.sermonTitle || entry.title));
+        // The small-screen source is empty: phones never download a video thumbnail.
+        thumbnail.innerHTML = `<picture><source media="(min-width: 701px)" srcset="https://i.ytimg.com/vi/${guide.videoId}/mqdefault.jpg"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" width="320" height="180" loading="lazy" decoding="async"></picture>`;
+        card.querySelector('.speaker-sermon-body').prepend(thumbnail);
+      }
+    } catch {
+      if (request === navigation) card.querySelector('.speaker-description').innerHTML =
+        '<p>Description could not load. <a href="?week=' + encodeURIComponent(entry.id) + '">Open the sermon guide</a>.</p>';
+    }
+  }
+  function drain() {
+    if (request !== navigation) return;
+    while (active < 4 && queue.length) {
+      active++;
+      loadCard(queue.shift()).finally(() => { active--; drain(); });
+    }
+  }
+  const cards = article.querySelectorAll('.speaker-sermon');
+  if ('IntersectionObserver' in window) {
+    speakerObserver = new IntersectionObserver(items => {
+      for (const item of items) {
+        if (!item.isIntersecting) continue;
+        speakerObserver.unobserve(item.target);
+        queue.push(item.target);
+      }
+      drain();
+    }, { rootMargin: '400px' });
+    cards.forEach(card => speakerObserver.observe(card));
+  } else {
+    queue.push(...cards);
+    drain();
+  }
+}
+
 function showRequestedGuide(){
-  return show(new URLSearchParams(location.search).get('week'));
+  const params = new URLSearchParams(location.search);
+  if (params.has('speaker')) return showSpeaker(params.get('speaker'));
+  speakerObserver?.disconnect();
+  return show(params.get('week'));
 }
 
 async function start(){
