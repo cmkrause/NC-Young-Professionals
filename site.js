@@ -690,16 +690,31 @@ archiveDialog.addEventListener('close', () => {
 });
 
 function sermonArchiveEntry(guide) {
-  const seriesName = seriesById.get(guide.series)?.name;
-  const series = seriesName
-    ? '<em class="archive-series">' + esc(seriesName) + (guide.partLabel ? ', ' + esc(guide.partLabel) : '') + '</em>'
-    : '';
   const title = guide.sermonTitle || guide.title;
+  const part = guide.partLabel ? '<span class="archive-part">' + esc(guide.partLabel) + ' · </span>' : '';
   const metadata = seriesPartDate(guide.date) + (guide.speaker ? ' • ' + guide.speaker : '');
-  return `<a class="week" href="?week=${encodeURIComponent(guide.id)}" data-id="${esc(guide.id)}" aria-current="false"><strong class="archive-sermon-title">${esc(title)}</strong>${series}<span class="archive-metadata">${esc(metadata)}</span></a>`;
+  return `<a class="week" href="?week=${encodeURIComponent(guide.id)}" data-id="${esc(guide.id)}" aria-current="false"><strong class="archive-sermon-title">${part}${esc(title)}</strong><span class="archive-metadata">${esc(metadata)}</span></a>`;
+}
+function groupedSermonArchive(entries) {
+  const groups = [];
+  for (const entry of entries) {
+    const series = seriesById.has(entry.series) ? entry.series : null;
+    let group = groups.at(-1);
+    if (!group || group.series !== series) {
+      group = { series, entries: [] };
+      groups.push(group);
+    }
+    group.entries.push(entry);
+  }
+  return groups.map((group, index) => {
+    const heading = group.series
+      ? `<a href="?series=${encodeURIComponent(group.series)}">${esc(seriesById.get(group.series).name)}</a>`
+      : 'Standalone Sermons';
+    return `<section class="archive-group" aria-labelledby="archive-group-${index}"><h3 id="archive-group-${index}">${heading}</h3><div class="archive-group-entries">${group.entries.map(sermonArchiveEntry).join('')}</div></section>`;
+  }).join('');
 }
 function setupArchive() {
-  archive.innerHTML = listedWeeks.map(sermonArchiveEntry).join('');
+  archive.innerHTML = groupedSermonArchive(listedWeeks);
   archive.querySelectorAll('.week').forEach(link => {
     link.onclick = async event => {
       if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;

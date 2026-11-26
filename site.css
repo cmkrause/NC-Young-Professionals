@@ -1347,3 +1347,13 @@ body:has(#sermon-archive[open]) .header-archive::after { display: none; }
 
 /* The full brand returns to the latest published guide. */
 .brand-home { display: inline-flex; min-width: 0; color: inherit; text-decoration: none; }
+
+/* Consecutive series form compact, visually connected archive groups. */
+#sermon-archive .archive-group + .archive-group { margin-top: 24px; }
+#sermon-archive .archive-group h3 { margin: 0 0 8px; padding: 0 4px; font-size: 1.05em; font-weight: 600; font-style: italic; }
+#sermon-archive .archive-group h3 a { color: inherit; text-decoration: none; }
+#sermon-archive .archive-group h3 a:hover { text-decoration: underline; }
+#sermon-archive .archive-group-entries { border-left: 2px solid var(--line); margin-left: 4px; padding-left: 10px; }
+#sermon-archive .archive-group-entries .week { display: block; border: 0; border-radius: 5px; padding: 9px 10px; }
+#sermon-archive .archive-group-entries .week + .week { margin-top: 2px; }
+#sermon-archive .archive-part { font-weight: 400; color: var(--muted); }
