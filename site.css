@@ -1340,3 +1340,7 @@ body:has(#sermon-archive[open]) .header-archive::after { display: none; }
   .speaker-thumbnail img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
   .speaker-description { flex: 1; min-width: 0; }
 }
+
+/* Emphasize only the name in collection page headings. */
+.speaker-heading { font-weight: 400; }
+.speaker-heading strong { font-weight: 700; }

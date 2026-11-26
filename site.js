@@ -731,13 +731,13 @@ function collectionSermonEntry(entry, kind) {
   </section>`;
 }
 function showSpeaker(name) {
-  return showSermonCollection('Sermons by ' + name, entry => entry.speaker === name, 'speaker');
+  return showSermonCollection('Sermons by ' + name, entry => entry.speaker === name, 'speaker', `Sermons by <strong>${esc(name)}</strong>`);
 }
 function showSeries(id) {
   const name = seriesById.get(id)?.name;
-  return showSermonCollection(name || 'Series not found', entry => Boolean(name) && entry.series === id, 'series');
+  return showSermonCollection(name ? 'Sermons in ' + name + ' Series' : 'Series not found', entry => Boolean(name) && entry.series === id, 'series', name ? `Sermons in <strong>${esc(name)}</strong> Series` : 'Series not found');
 }
-async function showSermonCollection(title, matches, kind) {
+async function showSermonCollection(title, matches, kind, heading = esc(title)) {
   const request = ++navigation;
   speakerObserver?.disconnect();
   closeSeriesTooltip();
@@ -747,7 +747,7 @@ async function showSermonCollection(title, matches, kind) {
   document.title = title + ' · NC Young Professionals';
   document.querySelectorAll('.week').forEach(link => link.setAttribute('aria-current', 'false'));
   const entries = listedWeeks.filter(matches);
-  article.innerHTML = `<h1 class="speaker-heading">${esc(title)}</h1>
+  article.innerHTML = `<h1 class="speaker-heading">${heading}</h1>
     ${entries.length ? entries.map(entry => collectionSermonEntry(entry, kind)).join('') : '<p>No published sermons found for this ' + kind + '.</p>'}`;
   setupSlides();
   // Fetch only nearby cards, with bounded concurrency even for a large archive.
