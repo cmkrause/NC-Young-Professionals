@@ -1359,8 +1359,8 @@ body:has(#sermon-archive[open]) .header-archive::after { display: none; }
 #sermon-archive .archive-part { font-weight: 400; color: var(--muted); }
 
 /* Small chevrons distinguish speaker and series navigation from plain text. */
-a.series-name, a.speaker-link { text-decoration: none; }
-a.series-name::after, a.speaker-link::after {
+a.series-name, a.speaker-link, a.browse-series { text-decoration: none; }
+a.series-name::after, a.speaker-link::after, a.browse-series::after {
   content: '';
   display: inline-block;
   width: .28em;
@@ -1373,4 +1373,19 @@ a.series-name::after, a.speaker-link::after {
   vertical-align: middle;
   opacity: .65;
 }
-a.series-name:hover, a.speaker-link:hover { text-decoration: underline; }
+a.series-name:hover, a.speaker-link:hover, a.browse-series:hover { text-decoration: underline; }
+
+/* The permalink is centered beside the title and its metadata, below the series. */
+.guide-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px;
+  grid-template-areas: "series series" "title permalink" "metadata permalink" "status status" "field field";
+  column-gap: 12px;
+  margin-bottom: 12px;
+}
+.guide-heading > .series-nav { grid-area: series; }
+.guide-heading > h1 { grid-area: title; margin: .2em 0 4px; overflow-wrap: anywhere; }
+.guide-heading > .date-share { grid-area: metadata; margin: 0; }
+.guide-heading > .copy-link { grid-area: permalink; align-self: center; justify-self: end; justify-content: center; width: 44px; min-height: 44px; }
+.guide-heading > .share-status { grid-area: status; }
+.guide-heading > .permalink-field { grid-area: field; }

@@ -509,7 +509,7 @@ function sermonHeading(guide) {
   }).join('');
   return `
     <nav class="series-nav" aria-label="${esc(seriesName)} series">
-      <a class="series-name" href="?series=${encodeURIComponent(guide.series)}">${esc(seriesName)}</a>
+      <a class="series-name" title="See other sermons in the ${esc(seriesName)} series" href="?series=${encodeURIComponent(guide.series)}">${esc(seriesName)}</a>
       ${badges}
     </nav>
     <h1>${esc(guide.sermonTitle)}</h1>`;
@@ -525,10 +525,11 @@ function headerDate(value, currentYear = new Date().getFullYear()) {
 function guideHeader(guide, isDraft) {
   return `
     ${isDraft ? '<p class="draft-status">Unlisted draft</p>' : ''}
-    ${sermonHeading(guide)}
-    <div class="date-share">
-      <p class="subtitle">${guide.speaker ? '<a class="speaker-link" href="?speaker=' + encodeURIComponent(guide.speaker) + '">' + esc(guide.speaker) + '</a> • ' : ''}${esc(headerDate(guide.date))}</p>
-      <span class="permalink-separator" aria-hidden="true">•</span>
+    <div class="guide-heading">
+      ${sermonHeading(guide)}
+      <div class="date-share">
+        <p class="subtitle">${guide.speaker ? '<a class="speaker-link" title="See other sermons by ' + esc(guide.speaker) + '" href="?speaker=' + encodeURIComponent(guide.speaker) + '">' + esc(guide.speaker) + '</a> • ' : ''}${esc(headerDate(guide.date))}</p>
+      </div>
       <button class="copy-link" id="copy-link" aria-label="Copy link to this week" title="Copy link to this week">
         <span aria-hidden="true">🔗</span>
       </button>
@@ -715,7 +716,7 @@ function groupedSermonArchive(entries) {
   }
   return groups.map((group, index) => {
     const heading = group.series
-      ? `<a href="?series=${encodeURIComponent(group.series)}">${esc(seriesById.get(group.series).name)}</a>`
+      ? `<a class="browse-series" title="See other sermons in the ${esc(seriesById.get(group.series).name)} series" href="?series=${encodeURIComponent(group.series)}">${esc(seriesById.get(group.series).name)}</a>`
       : 'Standalone Sermons';
     return `<section class="archive-group" aria-labelledby="archive-group-${index}"><h3 id="archive-group-${index}">${heading}</h3><div class="archive-group-entries">${group.entries.map(sermonArchiveEntry).join('')}</div></section>`;
   }).join('');
@@ -747,8 +748,8 @@ function collectionSermonEntry(entry, kind) {
     <h2><a href="?week=${encodeURIComponent(entry.id)}">${esc(entry.sermonTitle || entry.title)}</a></h2>
     ${kind === 'series'
       ? (entry.partLabel ? `<p class="speaker-series">${esc(entry.partLabel)}</p>` : '')
-      : (series ? `<p class="speaker-series"><em><a href="?series=${encodeURIComponent(entry.series)}">${esc(series)}</a>${entry.partLabel ? ', ' + esc(entry.partLabel) : ''}</em></p>` : '')}
-    <p class="speaker-date">${entry.speaker ? `<a class="speaker-link" href="?speaker=${encodeURIComponent(entry.speaker)}">${esc(entry.speaker)}</a> • ` : ''}${esc(date(entry.date))}</p>
+      : (series ? `<p class="speaker-series"><em><a class="browse-series" title="See other sermons in the ${esc(series)} series" href="?series=${encodeURIComponent(entry.series)}">${esc(series)}</a>${entry.partLabel ? ', ' + esc(entry.partLabel) : ''}</em></p>` : '')}
+    <p class="speaker-date">${entry.speaker ? `<a class="speaker-link" title="See other sermons by ${esc(entry.speaker)}" href="?speaker=${encodeURIComponent(entry.speaker)}">${esc(entry.speaker)}</a> • ` : ''}${esc(date(entry.date))}</p>
     <div class="speaker-sermon-body"><div class="speaker-description"><p role="status">Loading description…</p></div></div>
   </section>`;
 }
