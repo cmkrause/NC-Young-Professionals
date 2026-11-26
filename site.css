@@ -1357,3 +1357,20 @@ body:has(#sermon-archive[open]) .header-archive::after { display: none; }
 #sermon-archive .archive-group-entries .week { display: block; border: 0; border-radius: 5px; padding: 9px 10px; }
 #sermon-archive .archive-group-entries .week + .week { margin-top: 2px; }
 #sermon-archive .archive-part { font-weight: 400; color: var(--muted); }
+
+/* Small chevrons distinguish speaker and series navigation from plain text. */
+a.series-name, a.speaker-link { text-decoration: none; }
+a.series-name::after, a.speaker-link::after {
+  content: '';
+  display: inline-block;
+  width: .28em;
+  height: .28em;
+  margin-left: .35em;
+  margin-right: .12em;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  transform: translateY(-.08em) rotate(45deg);
+  vertical-align: middle;
+  opacity: .65;
+}
+a.series-name:hover, a.speaker-link:hover { text-decoration: underline; }

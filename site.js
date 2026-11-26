@@ -515,12 +515,19 @@ function sermonHeading(guide) {
     <h1>${esc(guide.sermonTitle)}</h1>`;
 }
 
+function headerDate(value, currentYear = new Date().getFullYear()) {
+  const day = new Date(value + 'T12:00:00');
+  const options = { month: 'long', day: 'numeric' };
+  if (day.getFullYear() !== currentYear) options.year = 'numeric';
+  return day.toLocaleDateString('en-US', options);
+}
+
 function guideHeader(guide, isDraft) {
   return `
     ${isDraft ? '<p class="draft-status">Unlisted draft</p>' : ''}
     ${sermonHeading(guide)}
     <div class="date-share">
-      <p class="subtitle">${guide.speaker ? '<a class="speaker-link" href="?speaker=' + encodeURIComponent(guide.speaker) + '">' + esc(guide.speaker) + '</a> • ' : ''}${esc(date(guide.date))}</p>
+      <p class="subtitle">${guide.speaker ? '<a class="speaker-link" href="?speaker=' + encodeURIComponent(guide.speaker) + '">' + esc(guide.speaker) + '</a> • ' : ''}${esc(headerDate(guide.date))}</p>
       <span class="permalink-separator" aria-hidden="true">•</span>
       <button class="copy-link" id="copy-link" aria-label="Copy link to this week" title="Copy link to this week">
         <span aria-hidden="true">🔗</span>
