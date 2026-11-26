@@ -719,11 +719,13 @@ function setupArchive() {
 
 
 let speakerObserver;
-function collectionSermonEntry(entry) {
+function collectionSermonEntry(entry, kind) {
   const series = seriesById.get(entry.series)?.name;
   return `<section class="speaker-sermon" data-guide-id="${esc(entry.id)}">
     <h2><a href="?week=${encodeURIComponent(entry.id)}">${esc(entry.sermonTitle || entry.title)}</a></h2>
-    ${series ? `<p class="speaker-series"><em><a href="?series=${encodeURIComponent(entry.series)}">${esc(series)}</a>${entry.partLabel ? ', ' + esc(entry.partLabel) : ''}</em></p>` : ''}
+    ${kind === 'series'
+      ? (entry.partLabel ? `<p class="speaker-series">${esc(entry.partLabel)}</p>` : '')
+      : (series ? `<p class="speaker-series"><em><a href="?series=${encodeURIComponent(entry.series)}">${esc(series)}</a>${entry.partLabel ? ', ' + esc(entry.partLabel) : ''}</em></p>` : '')}
     <p class="speaker-date">${entry.speaker ? `<a class="speaker-link" href="?speaker=${encodeURIComponent(entry.speaker)}">${esc(entry.speaker)}</a> • ` : ''}${esc(date(entry.date))}</p>
     <div class="speaker-sermon-body"><div class="speaker-description"><p role="status">Loading description…</p></div></div>
   </section>`;
@@ -746,7 +748,7 @@ async function showSermonCollection(title, matches, kind) {
   document.querySelectorAll('.week').forEach(link => link.setAttribute('aria-current', 'false'));
   const entries = listedWeeks.filter(matches);
   article.innerHTML = `<h1 class="speaker-heading">${esc(title)}</h1>
-    ${entries.length ? entries.map(collectionSermonEntry).join('') : '<p>No published sermons found for this ' + kind + '.</p>'}`;
+    ${entries.length ? entries.map(entry => collectionSermonEntry(entry, kind)).join('') : '<p>No published sermons found for this ' + kind + '.</p>'}`;
   setupSlides();
   // Fetch only nearby cards, with bounded concurrency even for a large archive.
   const queue = [];
