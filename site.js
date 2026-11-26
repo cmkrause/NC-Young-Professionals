@@ -748,7 +748,7 @@ function collectionSermonEntry(entry, kind) {
     <h2><a href="?week=${encodeURIComponent(entry.id)}">${esc(entry.sermonTitle || entry.title)}</a></h2>
     ${kind === 'series'
       ? (entry.partLabel ? `<p class="speaker-series">${esc(entry.partLabel)}</p>` : '')
-      : (series ? `<p class="speaker-series"><em><a class="browse-series" title="See other sermons in the ${esc(series)} series" href="?series=${encodeURIComponent(entry.series)}">${esc(series)}</a>${entry.partLabel ? ', ' + esc(entry.partLabel) : ''}</em></p>` : '')}
+      : (series ? `<p class="speaker-series"><em><a class="browse-series" title="See other sermons in the ${esc(series)} series" href="?series=${encodeURIComponent(entry.series)}">${esc(series)}</a>${entry.partLabel ? ' • ' + esc(entry.partLabel) : ''}</em></p>` : '')}
     <p class="speaker-date">${entry.speaker ? `<a class="speaker-link" title="See other sermons by ${esc(entry.speaker)}" href="?speaker=${encodeURIComponent(entry.speaker)}">${esc(entry.speaker)}</a> • ` : ''}${esc(date(entry.date))}</p>
     <div class="speaker-sermon-body"><div class="speaker-description"><p role="status">Loading description…</p></div></div>
   </section>`;
