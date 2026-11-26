@@ -1358,22 +1358,30 @@ body:has(#sermon-archive[open]) .header-archive::after { display: none; }
 #sermon-archive .archive-group-entries .week + .week { margin-top: 2px; }
 #sermon-archive .archive-part { font-weight: 400; color: var(--muted); }
 
-/* Small chevrons distinguish speaker and series navigation from plain text. */
-a.series-name, a.speaker-link, a.browse-series { text-decoration: none; }
-a.series-name::after, a.speaker-link::after, a.browse-series::after {
-  content: '';
-  display: inline-block;
-  width: .28em;
-  height: .28em;
-  margin-left: .35em;
-  margin-right: .12em;
-  border-top: 1.5px solid currentColor;
-  border-right: 1.5px solid currentColor;
-  transform: translateY(-.08em) rotate(45deg);
-  vertical-align: middle;
-  opacity: .65;
+/* Quiet, theme-aware badges distinguish series and speaker links. */
+a.series-name, a.speaker-link, a.browse-series {
+  display: inline-flex;
+  align-items: center;
+  gap: .3em;
+  max-width: 100%;
+  padding: .06em .35em;
+  border-radius: .3em;
+  background: var(--selected);
+  color: inherit;
+  text-decoration: none;
+  vertical-align: baseline;
 }
-a.series-name:hover, a.speaker-link:hover, a.browse-series:hover { text-decoration: underline; }
+.browse-icon {
+  width: .8em;
+  height: .8em;
+  flex: 0 0 .8em;
+  opacity: .7;
+}
+a.series-name:hover, a.speaker-link:hover, a.browse-series:hover,
+#sermon-archive .archive-group h3 a.browse-series:hover {
+  background: var(--line);
+  text-decoration: none;
+}
 
 /* The permalink is centered beside the title and its metadata, below the series. */
 .guide-heading {

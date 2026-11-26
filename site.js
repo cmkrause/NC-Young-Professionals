@@ -487,6 +487,13 @@ document.addEventListener('keydown', event => {
 window.addEventListener('scroll', closeSeriesTooltip, { passive: true });
 window.addEventListener('resize', closeSeriesTooltip);
 
+function browseIcon(kind) {
+  const shape = kind === 'speaker'
+    ? '<circle cx="12" cy="7" r="3.4"/><path d="M5 21v-3a7 7 0 0 1 14 0v3Z"/>'
+    : '<rect x="3" y="3" width="13" height="10" rx="1.7" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="8" y="10" width="13" height="10" rx="1.7" fill="var(--bg)" stroke="currentColor" stroke-width="1.7"/>';
+  return '<svg class="browse-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">' + shape + '</svg>';
+}
+
 function sermonHeading(guide) {
   const seriesName = seriesById.get(guide.series)?.name;
   if (!seriesName || !guide.partLabel || !guide.sermonTitle) {
@@ -509,7 +516,7 @@ function sermonHeading(guide) {
   }).join('');
   return `
     <nav class="series-nav" aria-label="${esc(seriesName)} series">
-      <a class="series-name" title="See other sermons in the ${esc(seriesName)} series" href="?series=${encodeURIComponent(guide.series)}">${esc(seriesName)}</a>
+      <a class="series-name" title="See other sermons in the ${esc(seriesName)} series" href="?series=${encodeURIComponent(guide.series)}">${browseIcon('series')}${esc(seriesName)}</a>
       ${badges}
     </nav>
     <h1>${esc(guide.sermonTitle)}</h1>`;
@@ -528,7 +535,7 @@ function guideHeader(guide, isDraft) {
     <div class="guide-heading">
       ${sermonHeading(guide)}
       <div class="date-share">
-        <p class="subtitle">${guide.speaker ? '<a class="speaker-link" title="See other sermons by ' + esc(guide.speaker) + '" href="?speaker=' + encodeURIComponent(guide.speaker) + '">' + esc(guide.speaker) + '</a> • ' : ''}${esc(headerDate(guide.date))}</p>
+        <p class="subtitle">${guide.speaker ? '<a class="speaker-link" title="See other sermons by ' + esc(guide.speaker) + '" href="?speaker=' + encodeURIComponent(guide.speaker) + '">' + browseIcon('speaker') + esc(guide.speaker) + '</a> • ' : ''}${esc(headerDate(guide.date))}</p>
       </div>
       <button class="copy-link" id="copy-link" aria-label="Copy link to this week" title="Copy link to this week">
         <span aria-hidden="true">🔗</span>
@@ -716,7 +723,7 @@ function groupedSermonArchive(entries) {
   }
   return groups.map((group, index) => {
     const heading = group.series
-      ? `<a class="browse-series" title="See other sermons in the ${esc(seriesById.get(group.series).name)} series" href="?series=${encodeURIComponent(group.series)}">${esc(seriesById.get(group.series).name)}</a>`
+      ? `<a class="browse-series" title="See other sermons in the ${esc(seriesById.get(group.series).name)} series" href="?series=${encodeURIComponent(group.series)}">${browseIcon('series')}${esc(seriesById.get(group.series).name)}</a>`
       : 'Standalone Sermons';
     return `<section class="archive-group" aria-labelledby="archive-group-${index}"><h3 id="archive-group-${index}">${heading}</h3><div class="archive-group-entries">${group.entries.map(sermonArchiveEntry).join('')}</div></section>`;
   }).join('');
@@ -748,8 +755,8 @@ function collectionSermonEntry(entry, kind) {
     <h2><a href="?week=${encodeURIComponent(entry.id)}">${esc(entry.sermonTitle || entry.title)}</a></h2>
     ${kind === 'series'
       ? (entry.partLabel ? `<p class="speaker-series">${esc(entry.partLabel)}</p>` : '')
-      : (series ? `<p class="speaker-series"><em><a class="browse-series" title="See other sermons in the ${esc(series)} series" href="?series=${encodeURIComponent(entry.series)}">${esc(series)}</a>${entry.partLabel ? ' • ' + esc(entry.partLabel) : ''}</em></p>` : '')}
-    <p class="speaker-date">${entry.speaker ? `<a class="speaker-link" title="See other sermons by ${esc(entry.speaker)}" href="?speaker=${encodeURIComponent(entry.speaker)}">${esc(entry.speaker)}</a> • ` : ''}${esc(date(entry.date))}</p>
+      : (series ? `<p class="speaker-series"><em><a class="browse-series" title="See other sermons in the ${esc(series)} series" href="?series=${encodeURIComponent(entry.series)}">${browseIcon('series')}${esc(series)}</a>${entry.partLabel ? ' • ' + esc(entry.partLabel) : ''}</em></p>` : '')}
+    <p class="speaker-date">${entry.speaker ? `<a class="speaker-link" title="See other sermons by ${esc(entry.speaker)}" href="?speaker=${encodeURIComponent(entry.speaker)}">${browseIcon('speaker')}${esc(entry.speaker)}</a> • ` : ''}${esc(date(entry.date))}</p>
     <div class="speaker-sermon-body"><div class="speaker-description"><p role="status">Loading description…</p></div></div>
   </section>`;
 }
