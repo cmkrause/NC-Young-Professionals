@@ -1397,3 +1397,6 @@ a.series-name:hover, a.speaker-link:hover, a.browse-series:hover,
 .guide-heading > .copy-link { grid-area: permalink; align-self: center; justify-self: end; justify-content: center; width: 44px; min-height: 44px; }
 .guide-heading > .share-status { grid-area: status; }
 .guide-heading > .permalink-field { grid-area: field; }
+
+/* Badge styling separates the speaker from the guide date without punctuation. */
+.guide-heading .subtitle { display: flex; flex-wrap: wrap; align-items: center; column-gap: .6em; row-gap: .15em; }

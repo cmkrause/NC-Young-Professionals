@@ -535,7 +535,7 @@ function guideHeader(guide, isDraft) {
     <div class="guide-heading">
       ${sermonHeading(guide)}
       <div class="date-share">
-        <p class="subtitle">${guide.speaker ? '<a class="speaker-link" title="See other sermons by ' + esc(guide.speaker) + '" href="?speaker=' + encodeURIComponent(guide.speaker) + '">' + browseIcon('speaker') + esc(guide.speaker) + '</a> • ' : ''}${esc(headerDate(guide.date))}</p>
+        <p class="subtitle">${guide.speaker ? '<a class="speaker-link" title="See other sermons by ' + esc(guide.speaker) + '" href="?speaker=' + encodeURIComponent(guide.speaker) + '">' + browseIcon('speaker') + esc(guide.speaker) + '</a> ' : ''}<span class="guide-date">${esc(headerDate(guide.date))}</span></p>
       </div>
       <button class="copy-link" id="copy-link" aria-label="Copy link to this week" title="Copy link to this week">
         <span aria-hidden="true">🔗</span>
