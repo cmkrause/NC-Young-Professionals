@@ -19,9 +19,37 @@
   "ideas": [
     "In 1847, some of the best doctors in Europe at Vienna General Hospital were unknowingly killing their patients.",
     "Ignaz Semmelweis noticed that doctors moved from autopsies straight to the maternity ward without cleaning their hands. When he required a chlorinated lime wash, deaths dropped from about 12 percent to roughly 2 percent.",
-    "Many doctors resisted him, because accepting the evidence meant admitting they had been part of the problem.",
-    "The Dunning-Kruger effect says sometimes we don’t know enough to realize how little we know. Welcome to Mount Stupid.",
-    "Confirmation bias leads us to embrace information that confirms what we believe and dismiss information that challenges it.",
+    [
+      {
+        "text": "Many doctors resisted him, because accepting the evidence meant admitting they had been part of the problem."
+      },
+      {
+        "text": "[slide 4]",
+        "slide": 4
+      }
+    ],
+    [
+      {
+        "text": "The Dunning-Kruger effect says sometimes we don’t know enough to realize how little we know. Welcome to Mount Stupid."
+      },
+      {
+        "text": "[slide 5]",
+        "slide": 5
+      },
+      {
+        "text": "[slide 6]",
+        "slide": 6
+      }
+    ],
+    [
+      {
+        "text": "Confirmation bias leads us to embrace information that confirms what we believe and dismiss information that challenges it."
+      },
+      {
+        "text": "[slide 7]",
+        "slide": 7
+      }
+    ],
     [
       {
         "text": "Proverbs 26:12",
@@ -31,13 +59,59 @@
         "text": " says there is more hope for a fool than for someone who is wise in their own eyes."
       }
     ],
-    "The Greek word for disciple, mathētēs, means learner. You can’t be a disciple and think you know it all.",
-    "Peter had the right answer about Jesus and still misunderstood what it meant. On the Mount of Transfiguration, God interrupted him with, “Listen to him!”",
-    "Asking honest questions is a sign you’re finally willing to learn. In the Bible, the closer people get to God, the less impressed they are with themselves.",
-    "Certainty is never the destination… growth is. Three words worth practicing: “I was wrong.” Let’s climb down from Mount Stupid and let Jesus teach us something brand new."
+    [
+      {
+        "text": "The Greek word for disciple, mathētēs, means learner. You can’t be a disciple and think you know it all."
+      },
+      {
+        "text": "[slide 11]",
+        "slide": 11
+      }
+    ],
+    [
+      {
+        "text": "Peter had the right answer about Jesus and still misunderstood what it meant."
+      },
+      {
+        "text": "[slide 12]",
+        "slide": 12
+      },
+      {
+        "text": " On the Mount of Transfiguration, God interrupted him with, “Listen to him!”"
+      }
+    ],
+    [
+      {
+        "text": "Asking honest questions is a sign you’re finally willing to learn. In the Bible, the closer people get to God, the less impressed they are with themselves."
+      },
+      {
+        "text": "[slide 16]",
+        "slide": 16
+      }
+    ],
+    [
+      {
+        "text": "Certainty is never the destination… growth is. Three words worth practicing: “I was wrong.”"
+      },
+      {
+        "text": "[slide 15]",
+        "slide": 15
+      },
+      {
+        "text": " Let’s climb down from Mount Stupid and let Jesus teach us something brand new."
+      }
+    ]
   ],
   "questions": [
-    "What’s something you were absolutely certain about when you were younger that you’ve completely changed your mind about?",
+    [
+      {
+        "text": "What’s something you were absolutely certain about when you were younger that you’ve completely changed your mind about?"
+      },
+      {
+        "text": "[slide 14]",
+        "slide": 14
+      }
+    ],
     [
       {
         "text": "Read "
@@ -47,7 +121,14 @@
         "passage": "PRO.26.12"
       },
       {
-        "text": ". Forrest said the problem isn’t that we don’t know something, it’s that we’re convinced we already do. Where do you see that in the world right now, and where might you see it in yourself?"
+        "text": ". Forrest said the problem isn’t that we don’t know something, it’s that we’re convinced we already do."
+      },
+      {
+        "text": "[slide 8]",
+        "slide": 8
+      },
+      {
+        "text": " Where do you see that in the world right now, and where might you see it in yourself?"
       }
     ],
     [
@@ -59,7 +140,14 @@
         "passage": "MAT.16.15-23"
       },
       {
-        "text": ". Peter gets the answer exactly right, and moments later he pulls Jesus aside to correct him. Where have you had the right answer and still missed what it meant?"
+        "text": ". Peter gets the answer exactly right, and moments later he pulls Jesus aside to correct him."
+      },
+      {
+        "text": "[slide 12]",
+        "slide": 12
+      },
+      {
+        "text": " Where have you had the right answer and still missed what it meant?"
       }
     ],
     [
@@ -72,11 +160,45 @@
       },
       {
         "text": ". While Peter was still talking, God interrupted with, “Listen to him!” What tends to keep you from listening to Jesus: busyness, being sure you’re right, or something else?"
+      },
+      {
+        "text": "[slide 13]",
+        "slide": 13
       }
     ],
-    "Asking honest questions is a sign you’re finally willing to learn. How has a question about faith helped you grow?",
-    "Moses, Isaiah, Job, and Peter all came away from meeting God with a bigger view of God and a more realistic view of themselves. How has getting closer to God changed the way you see yourself?",
-    "“I was wrong” … when was the last time you said those words? Who could you ask a question this week instead of correcting?"
+    [
+      {
+        "text": "Asking honest questions is a sign you’re finally willing to learn."
+      },
+      {
+        "text": "[slide 15]",
+        "slide": 15
+      },
+      {
+        "text": " How has a question about faith helped you grow?"
+      }
+    ],
+    [
+      {
+        "text": "Moses, Isaiah, Job, and Peter all came away from meeting God with a bigger view of God and a more realistic view of themselves. How has getting closer to God changed the way you see yourself?"
+      },
+      {
+        "text": "[slide 16]",
+        "slide": 16
+      }
+    ],
+    [
+      {
+        "text": "“I was wrong” … when was the last time you said those words?"
+      },
+      {
+        "text": "[slide 15]",
+        "slide": 15
+      },
+      {
+        "text": " Who could you ask a question this week instead of correcting?"
+      }
+    ]
   ],
   "slides": [
     {
