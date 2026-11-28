@@ -1,0 +1,887 @@
+{
+  "schemaVersion": 1,
+  "id": "advent-2026",
+  "title": "Advent 2026",
+  "themes": [
+    {
+      "title": "Hope",
+      "start": "2026-11-29",
+      "color": "purple",
+      "video": {
+        "title": "Yakhal / Hope",
+        "url": "https://bibleproject.com/videos/yakhal-hope/"
+      },
+      "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=2"
+    },
+    {
+      "title": "Peace",
+      "start": "2026-12-06",
+      "color": "purple",
+      "video": {
+        "title": "Shalom / Peace",
+        "url": "https://bibleproject.com/videos/shalom-peace/",
+        "youtube": "oLYORLZOaZE"
+      },
+      "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=3"
+    },
+    {
+      "title": "Joy",
+      "start": "2026-12-13",
+      "color": "rose",
+      "video": {
+        "title": "Chara / Joy",
+        "url": "https://bibleproject.com/videos/chara-joy/"
+      },
+      "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=4"
+    },
+    {
+      "title": "Love",
+      "start": "2026-12-20",
+      "color": "purple",
+      "video": {
+        "title": "Agape / Love",
+        "url": "https://bibleproject.com/videos/agape-love/",
+        "youtube": "slyevQ1LW7A"
+      },
+      "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=5"
+    }
+  ],
+  "resources": [
+    {
+      "id": "calendar",
+      "title": "Daily Advent Calendar",
+      "description": "Scripture and reflection · 2–5 min",
+      "symbol": "candle",
+      "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf",
+      "days": [
+        {
+          "date": "2026-11-29",
+          "title": "Isaiah 8:17",
+          "theme": 0,
+          "scriptures": [
+            {
+              "label": "Isaiah 8:17",
+              "passage": "ISA.8.17"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=2"
+        },
+        {
+          "date": "2026-11-30",
+          "title": "Psalm 39:7",
+          "theme": 0,
+          "scriptures": [
+            {
+              "label": "Psalm 39:7",
+              "passage": "PSA.39.7"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=2"
+        },
+        {
+          "date": "2026-12-01",
+          "title": "Psalm 130:7",
+          "theme": 0,
+          "scriptures": [
+            {
+              "label": "Psalm 130:7",
+              "passage": "PSA.130.7"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=2"
+        },
+        {
+          "date": "2026-12-02",
+          "title": "Isaiah 40:31a",
+          "theme": 0,
+          "scriptures": [
+            {
+              "label": "Isaiah 40:31a",
+              "passage": "ISA.40.31"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=2"
+        },
+        {
+          "date": "2026-12-03",
+          "title": "1 Peter 1:3",
+          "theme": 0,
+          "scriptures": [
+            {
+              "label": "1 Peter 1:3",
+              "passage": "1PE.1.3"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=2"
+        },
+        {
+          "date": "2026-12-04",
+          "title": "Romans 8:20–21",
+          "theme": 0,
+          "scriptures": [
+            {
+              "label": "Romans 8:20–21",
+              "passage": "ROM.8.20-21"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=2"
+        },
+        {
+          "date": "2026-12-05",
+          "title": "Romans 8:24–25",
+          "theme": 0,
+          "scriptures": [
+            {
+              "label": "Romans 8:24–25",
+              "passage": "ROM.8.24-25"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=2"
+        },
+        {
+          "date": "2026-12-06",
+          "title": "Isaiah 26:3",
+          "theme": 1,
+          "scriptures": [
+            {
+              "label": "Isaiah 26:3",
+              "passage": "ISA.26.3"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=3"
+        },
+        {
+          "date": "2026-12-07",
+          "title": "Isaiah 9:6",
+          "theme": 1,
+          "scriptures": [
+            {
+              "label": "Isaiah 9:6",
+              "passage": "ISA.9.6"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=3"
+        },
+        {
+          "date": "2026-12-08",
+          "title": "Zechariah 9:9",
+          "theme": 1,
+          "scriptures": [
+            {
+              "label": "Zechariah 9:9",
+              "passage": "ZEC.9.9"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=3"
+        },
+        {
+          "date": "2026-12-09",
+          "title": "John 16:33",
+          "theme": 1,
+          "scriptures": [
+            {
+              "label": "John 16:33",
+              "passage": "JHN.16.33"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=3"
+        },
+        {
+          "date": "2026-12-10",
+          "title": "Colossians 1:19–20",
+          "theme": 1,
+          "scriptures": [
+            {
+              "label": "Colossians 1:19–20",
+              "passage": "COL.1.19-20"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=3"
+        },
+        {
+          "date": "2026-12-11",
+          "title": "Ephesians 2:14–15",
+          "theme": 1,
+          "scriptures": [
+            {
+              "label": "Ephesians 2:14–15",
+              "passage": "EPH.2.14-15"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=3"
+        },
+        {
+          "date": "2026-12-12",
+          "title": "Ephesians 4:1–3",
+          "theme": 1,
+          "scriptures": [
+            {
+              "label": "Ephesians 4:1–3",
+              "passage": "EPH.4.1-3"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=3"
+        },
+        {
+          "date": "2026-12-13",
+          "title": "Psalm 105:43",
+          "theme": 2,
+          "scriptures": [
+            {
+              "label": "Psalm 105:43",
+              "passage": "PSA.105.43"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=4"
+        },
+        {
+          "date": "2026-12-14",
+          "title": "Isaiah 51:3",
+          "theme": 2,
+          "scriptures": [
+            {
+              "label": "Isaiah 51:3",
+              "passage": "ISA.51.3"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=4"
+        },
+        {
+          "date": "2026-12-15",
+          "title": "Luke 2:10",
+          "theme": 2,
+          "scriptures": [
+            {
+              "label": "Luke 2:10",
+              "passage": "LUK.2.10"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=4"
+        },
+        {
+          "date": "2026-12-16",
+          "title": "John 15:10–11",
+          "theme": 2,
+          "scriptures": [
+            {
+              "label": "John 15:10–11",
+              "passage": "JHN.15.10-11"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=4"
+        },
+        {
+          "date": "2026-12-17",
+          "title": "Matthew 5:11–12a",
+          "theme": 2,
+          "scriptures": [
+            {
+              "label": "Matthew 5:11–12a",
+              "passage": "MAT.5.11-12"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=4"
+        },
+        {
+          "date": "2026-12-18",
+          "title": "2 Corinthians 6:10",
+          "theme": 2,
+          "scriptures": [
+            {
+              "label": "2 Corinthians 6:10",
+              "passage": "2CO.6.10"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=4"
+        },
+        {
+          "date": "2026-12-19",
+          "title": "Romans 15:13",
+          "theme": 2,
+          "scriptures": [
+            {
+              "label": "Romans 15:13",
+              "passage": "ROM.15.13"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=4"
+        },
+        {
+          "date": "2026-12-20",
+          "title": "Mark 12:30",
+          "theme": 3,
+          "scriptures": [
+            {
+              "label": "Mark 12:30",
+              "passage": "MRK.12.30"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=5"
+        },
+        {
+          "date": "2026-12-21",
+          "title": "John 13:34",
+          "theme": 3,
+          "scriptures": [
+            {
+              "label": "John 13:34",
+              "passage": "JHN.13.34"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=5"
+        },
+        {
+          "date": "2026-12-22",
+          "title": "Luke 6:35a",
+          "theme": 3,
+          "scriptures": [
+            {
+              "label": "Luke 6:35a",
+              "passage": "LUK.6.35"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=5"
+        },
+        {
+          "date": "2026-12-23",
+          "title": "1 John 4:8",
+          "theme": 3,
+          "scriptures": [
+            {
+              "label": "1 John 4:8",
+              "passage": "1JN.4.8"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=5"
+        },
+        {
+          "date": "2026-12-24",
+          "title": "1 Corinthians 13:4",
+          "theme": 3,
+          "scriptures": [
+            {
+              "label": "1 Corinthians 13:4",
+              "passage": "1CO.13.4"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=5"
+        },
+        {
+          "date": "2026-12-25",
+          "title": "John 3:16",
+          "theme": 3,
+          "scriptures": [
+            {
+              "label": "John 3:16",
+              "passage": "JHN.3.16"
+            }
+          ],
+          "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=5"
+        }
+      ]
+    },
+    {
+      "id": "road",
+      "title": "The Road to Christmas",
+      "description": "24-day devotional · 10–20 min",
+      "symbol": "star",
+      "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas",
+      "days": [
+        {
+          "date": "2026-12-01",
+          "title": "The Big Reveal That’s Still Mysterious",
+          "scriptures": [
+            {
+              "label": "John 1:1–4",
+              "passage": "JHN.1.1-4"
+            },
+            {
+              "label": "John 1:14–18",
+              "passage": "JHN.1.14-18"
+            },
+            {
+              "label": "Hebrews 1:1–3",
+              "passage": "HEB.1.1-3"
+            }
+          ],
+          "video": {
+            "title": "God",
+            "url": "https://bibleproject.com/videos/god-video/"
+          },
+          "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/1"
+        },
+        {
+          "date": "2026-12-02",
+          "title": "The Son of Man: More than a Nickname",
+          "scriptures": [
+            {
+              "label": "Daniel 7:13–14",
+              "passage": "DAN.7.13-14"
+            },
+            {
+              "label": "Mark 10:42–45",
+              "passage": "MRK.10.42-45"
+            },
+            {
+              "label": "Mark 14:60–62",
+              "passage": "MRK.14.60-62"
+            }
+          ],
+          "video": {
+            "title": "Son of Man",
+            "url": "https://bibleproject.com/videos/son-of-man/"
+          },
+          "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/2"
+        },
+        {
+          "date": "2026-12-03",
+          "title": "Hope for the Exhausted",
+          "scriptures": [
+            {
+              "label": "Psalm 130:1–5",
+              "passage": "PSA.130.1-5"
+            },
+            {
+              "label": "Isaiah 40:21–22",
+              "passage": "ISA.40.21-22"
+            },
+            {
+              "label": "Isaiah 40:28–31",
+              "passage": "ISA.40.28-31"
+            },
+            {
+              "label": "1 Peter 1:3–9",
+              "passage": "1PE.1.3-9"
+            }
+          ],
+          "video": {
+            "title": "Yakhal / Hope",
+            "url": "https://bibleproject.com/videos/yakhal-hope/"
+          },
+          "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/3"
+        },
+        {
+          "date": "2026-12-04",
+          "title": "Withering No More",
+          "scriptures": [
+            {
+              "label": "John 15:1–5",
+              "passage": "JHN.15.1-5"
+            },
+            {
+              "label": "Romans 11:17–24",
+              "passage": "ROM.11.17-24"
+            },
+            {
+              "label": "Revelation 22:1–5",
+              "passage": "REV.22.1-5"
+            }
+          ],
+          "video": {
+            "title": "Tree of Life",
+            "url": "https://bibleproject.com/videos/tree-of-life/"
+          },
+          "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/4"
+        },
+        {
+          "date": "2026-12-05",
+          "title": "Christmas and the Snake Crusher",
+          "scriptures": [
+            {
+              "label": "Genesis 49:10",
+              "passage": "GEN.49.10"
+            },
+            {
+              "label": "Micah 5:2–4",
+              "passage": "MIC.5.2-4"
+            },
+            {
+              "label": "Isaiah 11:1–9",
+              "passage": "ISA.11.1-9"
+            }
+          ],
+          "video": {
+            "title": "The Messiah",
+            "url": "https://bibleproject.com/videos/messiah/"
+          },
+          "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/5"
+        },
+        {
+          "date": "2026-12-06",
+          "title": "The Divine Relocation Project",
+          "scriptures": [
+            {
+              "label": "John 1:1–5",
+              "passage": "JHN.1.1-5"
+            },
+            {
+              "label": "John 1:14–18",
+              "passage": "JHN.1.14-18"
+            },
+            {
+              "label": "1 Corinthians 6:19",
+              "passage": "1CO.6.19"
+            },
+            {
+              "label": "Ephesians 2:17–22",
+              "passage": "EPH.2.17-22"
+            }
+          ],
+          "video": {
+            "title": "Heaven & Earth",
+            "url": "https://bibleproject.com/videos/heaven-and-earth/"
+          },
+          "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/6"
+        },
+        {
+          "date": "2026-12-07",
+          "title": "A (Not-So) Silent Night",
+          "scriptures": [
+            {
+              "label": "Isaiah 9:6–7",
+              "passage": "ISA.9.6-7"
+            },
+            {
+              "label": "Luke 2:8–16",
+              "passage": "LUK.2.8-16"
+            },
+            {
+              "label": "Matthew 5:9",
+              "passage": "MAT.5.9"
+            }
+          ],
+          "video": {
+            "title": "Shalom / Peace",
+            "url": "https://bibleproject.com/videos/shalom-peace/",
+            "youtube": "oLYORLZOaZE"
+          },
+          "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/7"
+        },
+        {
+          "date": "2026-12-08",
+          "title": "Redefining Good News",
+          "scriptures": [
+            {
+              "label": "Isaiah 52:7–10",
+              "passage": "ISA.52.7-10"
+            },
+            {
+              "label": "Matthew 4:23–24",
+              "passage": "MAT.4.23-24"
+            },
+            {
+              "label": "Matthew 18:1–5",
+              "passage": "MAT.18.1-5"
+            }
+          ],
+          "video": {
+            "title": "Gospel of the Kingdom",
+            "url": "https://bibleproject.com/videos/gospel-kingdom/"
+          },
+          "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/8"
+        },
+        {
+          "date": "2026-12-09",
+          "title": "Water for Very Dry Souls",
+          "scriptures": [
+            {
+              "label": "Ezekiel 37:1–14",
+              "passage": "EZK.37.1-14"
+            },
+            {
+              "label": "John 7:37–38",
+              "passage": "JHN.7.37-38"
+            }
+          ],
+          "video": {
+            "title": "Water of Life",
+            "url": "https://bibleproject.com/videos/water-of-life/"
+          },
+          "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/9"
+        },
+        {
+          "date": "2026-12-10",
+          "title": "The God Who Respects You",
+          "scriptures": [
+            {
+              "label": "Matthew 7:13–27",
+              "passage": "MAT.7.13-27"
+            }
+          ],
+          "video": {
+            "title": "The Choice",
+            "url": "https://bibleproject.com/videos/the-choice/"
+          },
+          "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/10"
+        },
+        {
+          "date": "2026-12-11",
+          "title": "Love That Won’t Quit",
+          "scriptures": [
+            {
+              "label": "Exodus 34:6",
+              "passage": "EXO.34.6"
+            },
+            {
+              "label": "Psalm 136:1–9",
+              "passage": "PSA.136.1-9"
+            },
+            {
+              "label": "Psalm 136:25–26",
+              "passage": "PSA.136.25-26"
+            }
+          ],
+          "video": {
+            "title": "Khesed / Loyal Love",
+            "url": "https://bibleproject.com/videos/loyal-love/"
+          },
+          "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/11"
+        },
+        {
+          "date": "2026-12-12",
+          "title": "Rugged Joy to the World",
+          "scriptures": [
+            {
+              "label": "Habakkuk 3:17–19",
+              "passage": "HAB.3.17-19"
+            },
+            {
+              "label": "Isaiah 61:1–4",
+              "passage": "ISA.61.1-4"
+            },
+            {
+              "label": "John 16:16–22",
+              "passage": "JHN.16.16-22"
+            }
+          ],
+          "video": {
+            "title": "Chara / Joy",
+            "url": "https://bibleproject.com/videos/chara-joy/"
+          },
+          "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/12"
+        },
+        {
+          "date": "2026-12-13",
+          "title": "The Infinite Power of Humility",
+          "scriptures": [
+            {
+              "label": "Colossians 1:15–20",
+              "passage": "COL.1.15-20"
+            },
+            {
+              "label": "Philippians 2:5–11",
+              "passage": "PHP.2.5-11"
+            }
+          ],
+          "video": {
+            "title": "The Last Will Be First",
+            "url": "https://bibleproject.com/videos/last-will-be-first/"
+          },
+          "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/13"
+        },
+        {
+          "date": "2026-12-14",
+          "title": "Mary’s Song: The Magnificat",
+          "scriptures": [
+            {
+              "label": "Luke 1:39–55",
+              "passage": "LUK.1.39-55"
+            }
+          ],
+          "video": {
+            "title": "Justice",
+            "url": "https://bibleproject.com/videos/justice/"
+          },
+          "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/14"
+        },
+        {
+          "date": "2026-12-15",
+          "title": "All Pretending Aside",
+          "scriptures": [
+            {
+              "label": "Matthew 6:1–13",
+              "passage": "MAT.6.1-13"
+            }
+          ],
+          "video": {
+            "title": "Warnings About Religious Practices",
+            "url": "https://bibleproject.com/videos/warnings-about-religious-practices/"
+          },
+          "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/15"
+        },
+        {
+          "date": "2026-12-16",
+          "title": "Christmas and the Dragon",
+          "scriptures": [
+            {
+              "label": "Genesis 3:1–7",
+              "passage": "GEN.3.1-7"
+            },
+            {
+              "label": "Isaiah 51:9–11",
+              "passage": "ISA.51.9-11"
+            },
+            {
+              "label": "Romans 12:17–21",
+              "passage": "ROM.12.17-21"
+            }
+          ],
+          "video": {
+            "title": "Chaos Dragon",
+            "url": "https://bibleproject.com/videos/chaos-dragon/"
+          },
+          "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/16"
+        },
+        {
+          "date": "2026-12-17",
+          "title": "How to Fill a Law Full",
+          "scriptures": [
+            {
+              "label": "Matthew 5:17–20",
+              "passage": "MAT.5.17-20"
+            },
+            {
+              "label": "Romans 13:8–10",
+              "passage": "ROM.13.8-10"
+            }
+          ],
+          "video": {
+            "title": "Jesus Fulfills the Law",
+            "url": "https://bibleproject.com/videos/jesus-fulfills-the-law/"
+          },
+          "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/17"
+        },
+        {
+          "date": "2026-12-18",
+          "title": "Created to Love",
+          "scriptures": [
+            {
+              "label": "1 Corinthians 13:1–13",
+              "passage": "1CO.13.1-13"
+            },
+            {
+              "label": "John 15:12–17",
+              "passage": "JHN.15.12-17"
+            }
+          ],
+          "video": {
+            "title": "Agape / Love",
+            "url": "https://bibleproject.com/videos/agape-love/",
+            "youtube": "slyevQ1LW7A"
+          },
+          "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/18"
+        },
+        {
+          "date": "2026-12-19",
+          "title": "Reclaiming What Was Stolen",
+          "scriptures": [
+            {
+              "label": "Exodus 6:6–8",
+              "passage": "EXO.6.6-8"
+            },
+            {
+              "label": "Luke 1:57–59",
+              "passage": "LUK.1.57-59"
+            }
+          ],
+          "video": {
+            "title": "Redemption",
+            "url": "https://bibleproject.com/videos/redemption/"
+          },
+          "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/19"
+        },
+        {
+          "date": "2026-12-20",
+          "title": "How to Give (and Receive) “Sky Stuff”",
+          "scriptures": [
+            {
+              "label": "Matthew 6:19–34",
+              "passage": "MAT.6.19-34"
+            },
+            {
+              "label": "Luke 18:18–24",
+              "passage": "LUK.18.18-24"
+            }
+          ],
+          "video": {
+            "title": "Wealth and Worry",
+            "url": "https://bibleproject.com/videos/wealth-and-worry/"
+          },
+          "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/20"
+        },
+        {
+          "date": "2026-12-21",
+          "title": "What Does “Eternal Life” Really Mean?",
+          "scriptures": [
+            {
+              "label": "John 3:14–17",
+              "passage": "JHN.3.14-17"
+            },
+            {
+              "label": "John 10:27–28",
+              "passage": "JHN.10.27-28"
+            },
+            {
+              "label": "John 11:25–27",
+              "passage": "JHN.11.25-27"
+            }
+          ],
+          "video": {
+            "title": "Eternal Life",
+            "url": "https://bibleproject.com/videos/eternal-life/"
+          },
+          "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/21"
+        },
+        {
+          "date": "2026-12-22",
+          "title": "Heaven Comes to Earth",
+          "scriptures": [
+            {
+              "label": "Matthew 6:9–13",
+              "passage": "MAT.6.9-13"
+            },
+            {
+              "label": "Luke 11:1–13",
+              "passage": "LUK.11.1-13"
+            }
+          ],
+          "video": {
+            "title": "The Lord’s Prayer",
+            "url": "https://bibleproject.com/videos/lords-prayer/"
+          },
+          "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/22"
+        },
+        {
+          "date": "2026-12-23",
+          "title": "The Creator Enters Creation",
+          "scriptures": [
+            {
+              "label": "John 1:1–18",
+              "passage": "JHN.1.1-18"
+            }
+          ],
+          "video": {
+            "title": "John 1",
+            "url": "https://bibleproject.com/videos/john-1/"
+          },
+          "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/23"
+        },
+        {
+          "date": "2026-12-24",
+          "title": "No Palace, No Parade, No Problem",
+          "scriptures": [
+            {
+              "label": "Luke 2:1–20",
+              "passage": "LUK.2.1-20"
+            }
+          ],
+          "video": {
+            "title": "The Birth of Jesus: Luke 1–2",
+            "url": "https://bibleproject.com/videos/gospel-luke-1/"
+          },
+          "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/24"
+        }
+      ]
+    }
+  ]
+}
