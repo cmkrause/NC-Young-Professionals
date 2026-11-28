@@ -23,3 +23,6 @@ Advent now uses the root `video-player.js` and `video-player.css` via relative p
 
 ## BibleProject video provider
 All 28 BibleProject video references (24 unique titles) now specify `provider: 'mux'` and the public `playbackId` obtained from each official BibleProject video page's Full Video link. The four weekly videos and their corresponding Road to Christmas entries use matching playback IDs. The Hope pilot was confirmed working by the site owner before rollout. The remaining videos have validated identifiers and markup, but playback and caption quality have not been individually tested in a browser. YouTube and BibleProject links are retained as alternatives. Sermon recordings remain on YouTube. The existing shared player requires no changes for this rollout.
+
+## Advent overview information
+The two original reading-plan introductions are rendered from the existing JSON in a native information dialog. The icon is centered vertically beside the two-line Advent heading, and the dialog behaves as a bottom sheet on phones. No reading content is duplicated or removed.
