@@ -219,19 +219,36 @@ function weeklyCandles(r,i,onLanding=false){
     return '<a class="week-candle'+(lit?' is-complete':'')+'" data-candle-date="'+d.date+'" href="'+(onLanding?weekHref(i,d):'#day-'+d.date)+'" aria-label="'+esc(label)+'"'+(today?' aria-current="date"':'')+'><span class="weekday">'+esc(weekdayShort(d.date))+'</span><span class="candle-art">'+candle(lit,rose)+'</span><span class="candle-date">'+Number(d.date.slice(-2))+'</span></a>';
   }).join('')+'</div>';
 }
+function resourceHeading(resource){
+  return '<div class="advent-resource-heading"><div class="advent-resource-copy"><h2>'+esc(resource.title)+'</h2><p class="muted">'+esc(resource.description)+'</p></div><button class="advent-info-button" type="button" data-info-resource="'+esc(resource.id)+'" aria-label="About '+esc(resource.title)+'" title="About '+esc(resource.title)+'" aria-haspopup="dialog" aria-controls="advent-info-dialog"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><circle cx="12" cy="7.5" r=".9" fill="currentColor" stroke="none"/></svg></button></div>';
+}
+function resourceIntroduction(resource){
+  return (resource.subtitle?'<p class="muted">'+esc(resource.subtitle)+'</p>':'')+paragraphs(resource.introduction)+credit();
+}
 function landing(){
   const today=localDate(),i=activeWeek(today),before=today<config.themes[0].start;
   const rCal=config.resources.find(r=>r.id==='calendar'),rRoad=config.resources.find(r=>r.id==='road');
   const after=today>rCal.days.at(-1).date,d=pick(rRoad),n=done(rRoad).size;
   const roadLabel=today<rRoad.days[0].date?'Begins '+shortDate(rRoad.days[0].date):today>rRoad.days.at(-1).date?'Explore the plan':'Today’s devotional';
-  root.innerHTML='<div class="hero compact-hero"><div class="hero-art">'+config.themes.map((t,j)=>'<div class="hero-candle">'+candle(!before&&j<=i,t.color==='rose')+'<span>'+esc(t.title)+'</span></div>').join('')+'</div><div class="advent-titlebar"><div class="advent-title-copy"><h1>'+esc(config.title)+'</h1><p class="muted">'+(before?'Begins '+shortDate(config.themes[0].start):after?'Christmas season':'Week '+(i+1)+' · '+esc(config.themes[i].title))+'</p></div><button id="advent-info-open" class="advent-info-button" type="button" aria-label="About these reading plans" title="About these reading plans" aria-haspopup="dialog" aria-controls="advent-info-dialog"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><circle cx="12" cy="7.5" r=".9" fill="currentColor" stroke="none"/></svg></button></div></div>'+
-  '<section class="card compact-card"><h2>'+esc(rCal.title)+'</h2><p class="muted">'+esc(rCal.description)+'</p><a class="resource-link" href="'+weekHref(i)+'"><span><strong>Week '+(i+1)+' · '+esc(config.themes[i].title)+'</strong><span class="muted resource-count">'+weekCount(rCal,i)+'</span></span><span class="resource-chevron" aria-hidden="true">›</span></a>'+weeklyCandles(rCal,i,true)+'</section>'+
-  '<section class="card compact-card"><h2>'+esc(rRoad.title)+'</h2><p class="muted">'+esc(rRoad.description)+'</p><a class="resource-link" href="'+href(rRoad,d)+'"><span><span class="muted resource-count">'+esc(roadLabel)+'</span><strong>Day '+(rRoad.days.indexOf(d)+1)+' · '+esc(d.title)+'</strong><span class="muted resource-count">'+n+' of '+rRoad.days.length+' devotionals completed</span></span><span class="resource-chevron" aria-hidden="true">›</span></a><progress aria-label="'+esc(rRoad.title)+' progress" value="'+n+'" max="'+rRoad.days.length+'"></progress></section>'+
-  foot()+'<dialog id="advent-info-dialog" class="advent-info-dialog" aria-labelledby="advent-info-title"><div class="advent-info-heading"><h2 id="advent-info-title">About these reading plans</h2><button id="advent-info-close" type="button" aria-label="Close information" autofocus>×</button></div><div class="advent-info-content">'+config.resources.map(r=>'<section class="advent-info-plan"><h3>'+esc(r.title)+'</h3>'+(r.subtitle?'<p class="muted">'+esc(r.subtitle)+'</p>':'')+paragraphs(r.introduction)+'</section>').join('')+credit()+'</div></dialog>';
-  const opener=root.querySelector('#advent-info-open'),dialog=root.querySelector('#advent-info-dialog'),closer=root.querySelector('#advent-info-close');
-  opener.addEventListener('click',()=>dialog.showModal());
+  root.innerHTML='<div class="hero compact-hero"><div class="hero-art">'+config.themes.map((t,j)=>'<div class="hero-candle">'+candle(!before&&j<=i,t.color==='rose')+'<span>'+esc(t.title)+'</span></div>').join('')+'</div><h1>'+esc(config.title)+'</h1><p class="muted">'+(before?'Begins '+shortDate(config.themes[0].start):after?'Christmas season':'Week '+(i+1)+' · '+esc(config.themes[i].title))+'</p></div>'+
+  '<section class="card compact-card">'+resourceHeading(rCal)+'<a class="resource-link" href="'+weekHref(i)+'"><span><strong>Week '+(i+1)+' · '+esc(config.themes[i].title)+'</strong><span class="muted resource-count">'+weekCount(rCal,i)+'</span></span><span class="resource-chevron" aria-hidden="true">›</span></a>'+weeklyCandles(rCal,i,true)+'</section>'+
+  '<section class="card compact-card">'+resourceHeading(rRoad)+'<a class="resource-link" href="'+href(rRoad,d)+'"><span><span class="muted resource-count">'+esc(roadLabel)+'</span><strong>Day '+(rRoad.days.indexOf(d)+1)+' · '+esc(d.title)+'</strong><span class="muted resource-count">'+n+' of '+rRoad.days.length+' devotionals completed</span></span><span class="resource-chevron" aria-hidden="true">›</span></a><progress aria-label="'+esc(rRoad.title)+' progress" value="'+n+'" max="'+rRoad.days.length+'"></progress></section>'+
+  foot()+'<dialog id="advent-info-dialog" class="advent-info-dialog" aria-labelledby="advent-info-title"><div class="advent-info-heading"><h2 id="advent-info-title"></h2><button id="advent-info-close" type="button" aria-label="Close information" autofocus>×</button></div><div class="advent-info-content"></div></dialog>';
+  const dialog=root.querySelector('#advent-info-dialog'),closer=root.querySelector('#advent-info-close');
+  let opener=null;
+  for(const button of root.querySelectorAll('.advent-info-button')){
+    button.addEventListener('click',()=>{
+      const resource=config.resources.find(r=>r.id===button.dataset.infoResource);
+      if(!resource)return;
+      opener=button;
+      dialog.querySelector('#advent-info-title').textContent=resource.title;
+      dialog.querySelector('.advent-info-content').innerHTML=resourceIntroduction(resource);
+      dialog.showModal();
+      dialog.scrollTop=0;
+    });
+  }
   closer.addEventListener('click',()=>dialog.close());
-  dialog.addEventListener('close',()=>opener.focus({preventScroll:true}));
+  dialog.addEventListener('close',()=>opener?.focus({preventScroll:true}));
   dialog.addEventListener('click',e=>{
     if(e.target!==dialog)return;
     const b=dialog.getBoundingClientRect();
