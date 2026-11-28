@@ -20,3 +20,6 @@ All 24 distinct BibleProject video IDs are mapped in the JSON (28 references inc
 
 ## Shared player
 Advent now uses the root `video-player.js` and `video-player.css` via relative paths. The renderer supplies the BibleProject title, YouTube ID and original source link. Video markup, deferred iframe activation, and player styling are maintained in the shared component rather than in seasonal files.
+
+## Mux pilot
+Only the weekly Hope video (`themes[0].video`) has `provider: 'mux'` and `playbackId` configured, sourced from BibleProject's official Hope video download link. All other videos, including Road to Christmas Day 3, retain YouTube as the default. Both external links remain available. Caption availability and playback in the live embedded player require browser verification before expanding the pilot.

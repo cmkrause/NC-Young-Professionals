@@ -10,7 +10,9 @@
       "video": {
         "title": "Yakhal / Hope",
         "url": "https://bibleproject.com/videos/yakhal-hope/",
-        "youtube": "4WYNBjJSYvE"
+        "youtube": "4WYNBjJSYvE",
+        "provider": "mux",
+        "playbackId": "heWJy3SAYNWL3Y6hyHe52gqS02NaGMke7wIADb301Xldw"
       },
       "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=2"
     },

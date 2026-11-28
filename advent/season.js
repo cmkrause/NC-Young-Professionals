@@ -166,7 +166,7 @@ function validateSeason(data){
   return data.resources.every(r=>Array.isArray(r.days)&&r.days.length>0&&r.days.every(d=>hasText(d.reflection)&&(r.symbol!=='star'||hasText(d.reading))));
 }
 async function loadSeason(){
-  const path='./advent-2026.json?v=20261128-video-ids';
+  const path='./advent-2026.json?v=20261128-mux-pilot';
   let result;
   try{result=await readJson(path,{cache:'no-store'});if(validateSeason(result))return result;}catch(e){console.warn('Advent data load failed; retrying',e)}
   result=await readJson(path+'&retry='+Date.now(),{cache:'reload'});
@@ -273,7 +273,7 @@ function section(title,content,open=false){return '<details class="section" '+(o
 function video(v,label,weekly=false){
   if(!v)return '';
   return section(label||v.title+' · Video',NCVideoPlayer.render({
-    id:v.youtube,title:v.title,
+    provider:v.provider||'youtube',id:v.provider==='mux'?v.playbackId:v.youtube,youtubeId:v.youtube,title:v.title,
     sourceUrl:v.url,sourceLabel:'Watch on BibleProject ↗',
     youtubeLabel:'Watch on YouTube ↗'
   })+(weekly?'':credit()));
