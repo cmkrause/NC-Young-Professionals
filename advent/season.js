@@ -271,12 +271,78 @@ function scriptureMarkup(d){return '<div class="scriptures">'+(d.scriptureGroups
 function aboutPlan(r){return r.introduction?.length?section('About this reading plan',(r.subtitle?'<p class="muted">'+esc(r.subtitle)+'</p>':'')+paragraphs(r.introduction)):''}
 function section(title,content,open=false){return '<details class="section" '+(open?'open':'')+'><summary>'+esc(title)+'</summary><div class="section-content">'+content+'</div></details>'}
 function video(v,label,weekly=false){if(!v)return '';return section(label||v.title+' · Video','<div class="video">'+(v.youtube?'<iframe loading="lazy" title="'+esc(v.title)+'" src="https://www.youtube-nocookie.com/embed/'+esc(v.youtube)+'" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>':'')+'<a class="source-link" href="'+esc(v.url)+'">Watch on BibleProject ↗</a></div>'+credit())}
-function reading(r,d){const index=r.days.indexOf(d),isCalendar=r.symbol==='candle',theme=config.themes[d.theme],source='<a class="source-link" href="'+esc(d.source)+'">'+(isCalendar?'Open the original weekly calendar (PDF) ↗':'Read the original Day '+(index+1)+' devotional and reflection ↗')+'</a>';const isDone=done(r).has(d.date);root.innerHTML='<nav class="breadcrumb" aria-label="Advent navigation"><a href="./">‹ '+esc(config.title)+'</a><span>·</span><a href="'+href(r)+'">'+esc(r.title)+'</a></nav><h1>'+esc(r.title)+'</h1>'+progress(r)+'<details class="calendar-toggle"><summary>All '+r.days.length+' days</summary>'+calendar(r,d)+'</details><div class="day-nav">'+(index>0?'<a href="'+href(r,r.days[index-1])+'" aria-label="Previous day">‹</a>':'<span class="edge"></span>')+'<div><div class="muted">'+esc(humanDate(d.date))+(d.date===localDate()?' · Today':'')+'</div><h2>'+esc(isCalendar?theme.title+' · '+d.title:'Day '+(index+1)+' · '+d.title)+'</h2></div>'+(index<r.days.length-1?'<a href="'+href(r,r.days[index+1])+'" aria-label="Next day">›</a>':'<span class="edge"></span>')+'</div>'+
-(!isCalendar?section('Devotional Reading',paragraphs(d.reading),true)+video(d.video):'')+
-section('Scripture Reading',scriptureMarkup(d),true)+
-section(isCalendar?'Reflection':'Reflection Exercises',paragraphs(d.reflection),true)+(isCalendar?video(theme.video):'')+(d.closing?'<div class="section">'+paragraphs(d.closing)+'</div>':'')+
-'<button class="action complete-button" id="complete" type="button" aria-pressed="'+isDone+'">'+(isDone?'✓ Completed · mark incomplete':(isCalendar?'Light this candle · mark complete':'Light this star · mark complete'))+'</button><div class="small-preview">'+calendar(r,d,true)+'</div><p><a href="'+esc(r.source)+'">Original reading plan ↗</a></p>'+foot();
-document.getElementById('complete').onclick=()=>{const open=root.querySelector('.calendar-toggle').open;toggle(r,d);reading(r,d);root.querySelector('.calendar-toggle').open=open;document.getElementById('complete').focus({preventScroll:true})}}
+// Deterministic, hand-drawn river-stone silhouettes; the same day has the same shape in both views.
+const stonePaths=[
+ 'M5 21 C3 14 9 8 19 7 C30 5 39 10 39 19 C39 27 30 31 20 31 C10 32 5 28 5 21Z',
+ 'M4 23 C4 16 13 13 22 12 C32 11 41 15 40 23 C39 29 30 32 19 31 C10 31 3 29 4 23Z',
+ 'M8 26 C3 21 5 13 13 8 C20 4 30 6 35 12 C42 19 38 27 30 31 C21 35 13 31 8 26Z',
+ 'M4 19 C6 10 14 11 20 8 C28 4 37 10 39 18 C42 25 33 30 24 31 C14 32 2 28 4 19Z',
+ 'M8 15 C12 7 21 5 29 8 C35 10 40 19 36 26 C32 34 21 34 12 30 C6 26 4 21 8 15Z',
+ 'M4 22 C3 15 12 9 21 10 C29 10 34 8 39 14 C44 23 36 29 26 31 C15 34 5 29 4 22Z'
+];
+const stoneOrder=[0,3,1,4,2,5,1,3,0,5,2,4,0,2,5,1,4,3,2,0,4,1,5];
+function roadSymbol(index,total){
+  if(index===total-1)return '<svg class="bethlehem-art" viewBox="0 0 44 44" aria-hidden="true" focusable="false"><path class="bethlehem-ray" d="M7 7l6 6m18 18 6 6M37 7l-6 6M13 31l-6 6"/><path class="bethlehem-shape" d="M22 1 25.5 15.5 39 22 25.5 26 22 43 18.5 26 5 22 18.5 15.5Z"/></svg>';
+  const shape=stonePaths[stoneOrder[index%stoneOrder.length]];
+  return '<svg class="stone-art" viewBox="0 0 44 40" aria-hidden="true" focusable="false"><path class="stone-shape" d="'+shape+'"/><path class="stone-check" d="M16 20l4 4 8-8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+}
+function roadLabel(r,d,i){
+  return 'Day '+(i+1)+' · '+shortDate(d.date)+(i===r.days.length-1?' · Christmas Eve':'')+(done(r).has(d.date)?', completed':', not completed')+(d.date===localDate()?', today':'');
+}
+function roadMarker(r,d,i,selected,map=false){
+  const lit=done(r).has(d.date),current=d===selected,today=d.date===localDate(),last=i===r.days.length-1;
+  const row=Math.floor(i/6),col=row%2===0?i%6:5-i%6;
+  return '<a class="road-marker'+(lit?' is-complete':'')+(today?' is-today':'')+(last?' is-destination':'')+'" href="'+href(r,d)+'" data-road-date="'+d.date+'" aria-label="'+esc(roadLabel(r,d,i))+'"'+(current?' aria-current="page"':'')+(map?' style="grid-column:'+(col+1)+';grid-row:'+(row+1)+'"':'')+'>'+roadSymbol(i,r.days.length)+'<span class="road-number">'+(i+1)+'</span></a>';
+}
+function roadMap(r,d){
+  return '<div class="journey-endpoints"><span>December 1</span><span>Christmas Eve</span></div><nav class="journey-map" aria-label="All devotional days, winding journey"><svg class="journey-path" viewBox="0 0 600 400" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M50 50 H550 Q585 50 585 85 V115 Q585 150 550 150 H50 Q15 150 15 185 V215 Q15 250 50 250 H550 Q585 250 585 285 V315 Q585 350 550 350 H50" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 5" vector-effect="non-scaling-stroke" stroke-linecap="round"/></svg>'+r.days.map((x,i)=>roadMarker(r,x,i,d,true)).join('')+'</nav>';
+}
+function roadCount(r){return done(r).size+' of '+r.days.length+' devotionals completed'}
+function roadNav(r,d){
+  const i=r.days.indexOf(d);
+  return '<div class="road-navigation"><div class="road-nav-heading"><span id="road-count" role="status">'+roadCount(r)+'</span><button type="button" class="journey-toggle" aria-expanded="false" aria-controls="journey-panel"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="5" cy="5" r="2"/><circle cx="19" cy="19" r="2"/><path d="M7 5h10a4 4 0 0 1 0 8H7a3 3 0 0 0 0 6h10"/></svg><span>Show journey</span></button></div><div class="road-strip-row">'+(i>0?'<a class="road-arrow" href="'+href(r,r.days[i-1])+'" aria-label="Previous day">‹</a>':'<span class="road-arrow" aria-hidden="true"></span>')+'<nav id="road-strip" class="road-strip" aria-label="Devotional days">'+r.days.map((x,j)=>roadMarker(r,x,j,d)).join('')+'</nav>'+(i<r.days.length-1?'<a class="road-arrow" href="'+href(r,r.days[i+1])+'" aria-label="Next day">›</a>':'<span class="road-arrow" aria-hidden="true"></span>')+'</div><div id="journey-panel" hidden>'+roadMap(r,d)+'</div></div>';
+}
+function updateRoadCompletion(r,d){
+  const i=r.days.indexOf(d),lit=done(r).has(d.date);
+  root.querySelectorAll('[data-road-date="'+d.date+'"]').forEach(a=>{
+    a.classList.toggle('is-complete',lit);
+    a.setAttribute('aria-label',roadLabel(r,d,i));
+  });
+  const top=root.querySelector('#road-complete-top'),bottom=root.querySelector('#complete');
+  top.setAttribute('aria-pressed',String(lit));
+  top.setAttribute('aria-label',(lit?'Mark incomplete: ':'Mark complete: ')+'Day '+(i+1));
+  top.innerHTML=completionIcon(lit);
+  bottom.setAttribute('aria-pressed',String(lit));
+  bottom.textContent=lit?'✓ Completed · Mark incomplete':'Mark day as complete';
+  root.querySelector('#road-count').textContent=roadCount(r);
+  if(storageFailed){const note=root.querySelector('.foot .storage-note');if(note)note.textContent='Browser storage is unavailable. Progress is temporary.'}
+}
+function centerRoadStrip(){
+  const strip=root.querySelector('#road-strip'),selected=strip?.querySelector('[aria-current="page"]');
+  if(!selected)return;
+  const a=strip.getBoundingClientRect(),b=selected.getBoundingClientRect();
+  strip.scrollLeft+=b.left-a.left+(b.width-a.width)/2;
+}
+function reading(r,d){
+  const index=r.days.indexOf(d),isDone=done(r).has(d.date);
+  root.innerHTML='<nav class="breadcrumb" aria-label="Advent navigation"><a href="./">‹ '+esc(config.title)+'</a></nav><h1 class="weekly-title">'+esc(r.title)+'</h1>'+roadNav(r,d)+
+  '<div class="road-heading"><div class="road-heading-copy"><p class="muted">Day '+(index+1)+' · '+esc(humanDate(d.date))+(d.date===localDate()?' <span class="today-label">· Today</span>':'')+'</p><h2>'+esc(d.title)+'</h2></div><button type="button" id="road-complete-top" class="reading-complete" aria-pressed="'+isDone+'" aria-label="'+(isDone?'Mark incomplete: ':'Mark complete: ')+'Day '+(index+1)+'">'+completionIcon(isDone)+'</button></div>'+
+  section('Devotional Reading',paragraphs(d.reading),true)+video(d.video)+
+  section('Scripture Reading',scriptureMarkup(d),true)+
+  section('Reflection Exercises',paragraphs(d.reflection),true)+(d.closing?'<div class="section">'+paragraphs(d.closing)+'</div>':'')+
+  '<button class="action complete-button" id="complete" type="button" aria-pressed="'+isDone+'">'+(isDone?'✓ Completed · Mark incomplete':'Mark day as complete')+'</button>'+
+  '<nav class="week-bottom-nav road-bottom-nav" aria-label="Adjacent devotional days">'+(index>0?'<a href="'+href(r,r.days[index-1])+'">‹ Previous day</a>':'<span></span>')+(index<r.days.length-1?'<a href="'+href(r,r.days[index+1])+'">Next day ›</a>':'<a href="./">Advent overview ›</a>')+'</nav><p class="original-week"><a href="'+esc(r.source)+'">Original reading plan ↗</a></p>'+foot();
+  const change=()=>{toggle(r,d);updateRoadCompletion(r,d)};
+  root.querySelector('#complete').addEventListener('click',change);
+  root.querySelector('#road-complete-top').addEventListener('click',change);
+  const journey=root.querySelector('.journey-toggle'),panel=root.querySelector('#journey-panel');
+  journey.addEventListener('click',()=>{
+    panel.hidden=!panel.hidden;
+    journey.setAttribute('aria-expanded',String(!panel.hidden));
+    journey.querySelector('span').textContent=panel.hidden?'Show journey':'Hide journey';
+  });
+  requestAnimationFrame(centerRoadStrip);
+}
 (async()=>{try{config=await loadSeason();await setupTranslations().catch(()=>{});const r=config.resources.find(x=>x.id===params.get('plan'));if(!r)landing();else if(r.id==='calendar')renderWeek(r,requestedWeek(r));else reading(r,r.days.find(x=>x.date===params.get('day'))||pick(r));}catch(e){root.innerHTML='<p>Advent readings could not load. Please refresh to retrieve the latest reading-plan data.</p><p><a href="./">Return to Advent</a> · <a href="https://bibleproject.com/guides/advent/">Original BibleProject resources</a></p>';console.error(e)}})();
 
 const seasonalHeader=document.querySelector('header');

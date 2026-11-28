@@ -11,3 +11,6 @@ The Advent renderer requests the reading JSON with a versioned URL and bypasses 
 
 ## Weekly calendar
 The calendar uses the existing theme index on each daily JSON entry. The four weekly views contain the complete daily scripture and reflection, one collapsible weekly video, and candle shortcuts. Completion buttons update only the affected candle, button and count, preserving scroll position and the current video. Storage keys and ISO date values are unchanged; no migration is needed. The overview shows the current week and the current Road to Christmas devotional, with full plan introductions available below.
+
+## Road to Christmas journey
+The daily Road to Christmas view uses a horizontally scrollable strip of 23 varied river-stone silhouettes and a Bethlehem star for the final day. The optional journey map uses the same icons in a four-row serpentine route. Marker links retain existing date permalinks; both completion controls update the strip, map and count in place without replacing the devotional or video. The JSON and localStorage keys are unchanged. The existing resource symbol value remains for data compatibility.
