@@ -166,7 +166,7 @@ function validateSeason(data){
   return data.resources.every(r=>Array.isArray(r.days)&&r.days.length>0&&r.days.every(d=>hasText(d.reflection)&&(r.symbol!=='star'||hasText(d.reading))));
 }
 async function loadSeason(){
-  const path='./advent-2026.json?v=20261128-mux-pilot';
+  const path='./advent-2026.json?v=20261128-mux-all';
   let result;
   try{result=await readJson(path,{cache:'no-store'});if(validateSeason(result))return result;}catch(e){console.warn('Advent data load failed; retrying',e)}
   result=await readJson(path+'&retry='+Date.now(),{cache:'reload'});

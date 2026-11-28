@@ -23,7 +23,9 @@
       "video": {
         "title": "Shalom / Peace",
         "url": "https://bibleproject.com/videos/shalom-peace/",
-        "youtube": "oLYORLZOaZE"
+        "youtube": "oLYORLZOaZE",
+        "provider": "mux",
+        "playbackId": "AcvvK00FUODUIzf7YN00BlR8WD9S4102fq5ZltQVPmtqag"
       },
       "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=3"
     },
@@ -34,7 +36,9 @@
       "video": {
         "title": "Chara / Joy",
         "url": "https://bibleproject.com/videos/chara-joy/",
-        "youtube": "qvOhQTuD2e0"
+        "youtube": "qvOhQTuD2e0",
+        "provider": "mux",
+        "playbackId": "xqCSMD5TvEzGWv00wGnDgiqwBP6446r3IaH49Tcycg7w"
       },
       "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=4"
     },
@@ -45,7 +49,9 @@
       "video": {
         "title": "Agape / Love",
         "url": "https://bibleproject.com/videos/agape-love/",
-        "youtube": "slyevQ1LW7A"
+        "youtube": "slyevQ1LW7A",
+        "provider": "mux",
+        "playbackId": "29r9CF5y4wUm6JRNoDILIcBKULUc01KiKbY4fIU9YV1A"
       },
       "source": "https://d1bsmz3sdihplr.cloudfront.net/media/advent/2026assets/2026-advent-calendar-english-v3.pdf#page=5"
     }
@@ -496,7 +502,9 @@
           "video": {
             "title": "God",
             "url": "https://bibleproject.com/videos/god-video/",
-            "youtube": "eAvYmE2YYIU"
+            "youtube": "eAvYmE2YYIU",
+            "provider": "mux",
+            "playbackId": "besUIzraM02kEUPHAGjHCuPwxBhiCST1eEtxFJRNmop8"
           },
           "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/1",
           "reading": [
@@ -555,7 +563,9 @@
           "video": {
             "title": "Son of Man",
             "url": "https://bibleproject.com/videos/son-of-man/",
-            "youtube": "z6cWEcqxhlI"
+            "youtube": "z6cWEcqxhlI",
+            "provider": "mux",
+            "playbackId": "JiTNkrJpp02MRrTnHXYZ6uTqT3u5M6izLr60248102RgmA"
           },
           "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/2",
           "reading": [
@@ -625,7 +635,9 @@
           "video": {
             "title": "Yakhal/Hope (Advent 1)",
             "url": "https://bibleproject.com/videos/yakhal-hope/",
-            "youtube": "4WYNBjJSYvE"
+            "youtube": "4WYNBjJSYvE",
+            "provider": "mux",
+            "playbackId": "heWJy3SAYNWL3Y6hyHe52gqS02NaGMke7wIADb301Xldw"
           },
           "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/3",
           "reading": [
@@ -695,7 +707,9 @@
           "video": {
             "title": "Tree of Life",
             "url": "https://bibleproject.com/videos/tree-of-life/",
-            "youtube": "TJLan-pJzfQ"
+            "youtube": "TJLan-pJzfQ",
+            "provider": "mux",
+            "playbackId": "b00VCMqwF8myoXmGxgdK02Esqc5U1Cl00sINcntcUeilS00"
           },
           "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/4",
           "reading": [
@@ -759,7 +773,9 @@
           "video": {
             "title": "The Messiah",
             "url": "https://bibleproject.com/videos/messiah/",
-            "youtube": "3dEh25pduQ8"
+            "youtube": "3dEh25pduQ8",
+            "provider": "mux",
+            "playbackId": "w1eN5wt02j9fHB02DSxVrlNWbUP00pjEfnUaV2RY00FWo3E"
           },
           "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/5",
           "reading": [
@@ -828,7 +844,9 @@
           "video": {
             "title": "Heaven & Earth",
             "url": "https://bibleproject.com/videos/heaven-and-earth/",
-            "youtube": "Zy2AQlK6C5k"
+            "youtube": "Zy2AQlK6C5k",
+            "provider": "mux",
+            "playbackId": "PIyXuO8FLxa9q9ZSSUXHXCc2pJQH8C009pCXKjuwGxNs"
           },
           "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/6",
           "reading": [
@@ -896,7 +914,9 @@
           "video": {
             "title": "Shalom/Peace (Advent 2)",
             "url": "https://bibleproject.com/videos/shalom-peace/",
-            "youtube": "oLYORLZOaZE"
+            "youtube": "oLYORLZOaZE",
+            "provider": "mux",
+            "playbackId": "AcvvK00FUODUIzf7YN00BlR8WD9S4102fq5ZltQVPmtqag"
           },
           "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/7",
           "reading": [
@@ -962,7 +982,9 @@
           "video": {
             "title": "Gospel of the Kingdom",
             "url": "https://bibleproject.com/videos/gospel-kingdom/",
-            "youtube": "xmFPS0f-kzs"
+            "youtube": "xmFPS0f-kzs",
+            "provider": "mux",
+            "playbackId": "mp3tjs02X5scbwi8LqbWiAsST3I02ZgUo028PjMWSF1xRY"
           },
           "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/8",
           "reading": [
@@ -1023,7 +1045,9 @@
           "video": {
             "title": "Water of Life",
             "url": "https://bibleproject.com/videos/water-of-life/",
-            "youtube": "PgmAkM39Zt4"
+            "youtube": "PgmAkM39Zt4",
+            "provider": "mux",
+            "playbackId": "ZPLUAJxtrg2amMZGKVq3zRwKegV2xjqDyj2VYOjOGZ8"
           },
           "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/9",
           "reading": [
@@ -1070,7 +1094,9 @@
           "video": {
             "title": "The Choice",
             "url": "https://bibleproject.com/videos/the-choice/",
-            "youtube": "0iJ1-_nH47c"
+            "youtube": "0iJ1-_nH47c",
+            "provider": "mux",
+            "playbackId": "GQuIQuYEH6IoixgZkMyU2sv8T0100N3022A00QrNmGNvONM"
           },
           "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/10",
           "reading": [
@@ -1118,7 +1144,9 @@
           "video": {
             "title": "Khesed/Loyal Love",
             "url": "https://bibleproject.com/videos/loyal-love/",
-            "youtube": "UfbyFLgs_NM"
+            "youtube": "UfbyFLgs_NM",
+            "provider": "mux",
+            "playbackId": "hpLwKf00Sdlgv01Nwk4pjdoq9BLYOlKTXAjD7J1Cbn8AE"
           },
           "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/11",
           "reading": [
@@ -1178,7 +1206,9 @@
           "video": {
             "title": "Chara/Joy (Advent 3)",
             "url": "https://bibleproject.com/videos/chara-joy/",
-            "youtube": "qvOhQTuD2e0"
+            "youtube": "qvOhQTuD2e0",
+            "provider": "mux",
+            "playbackId": "xqCSMD5TvEzGWv00wGnDgiqwBP6446r3IaH49Tcycg7w"
           },
           "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/12",
           "reading": [
@@ -1240,7 +1270,9 @@
           "video": {
             "title": "The Last Will Be First",
             "url": "https://bibleproject.com/videos/last-will-be-first/",
-            "youtube": "n-UenIDevpI"
+            "youtube": "n-UenIDevpI",
+            "provider": "mux",
+            "playbackId": "3hpzxSgYmRsJjgVB8oZavoV3y4S6sV48XUOQ6C02wNFg"
           },
           "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/13",
           "reading": [
@@ -1290,7 +1322,9 @@
           "video": {
             "title": "Justice",
             "url": "https://bibleproject.com/videos/justice/",
-            "youtube": "A14THPoc4-4"
+            "youtube": "A14THPoc4-4",
+            "provider": "mux",
+            "playbackId": "1V5ZkTXBbm4s3w7CLcrUsYF2dO49si2cl800IC01chrKA"
           },
           "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/14",
           "reading": [
@@ -1328,7 +1362,9 @@
           "video": {
             "title": "Warnings About Religious Practices",
             "url": "https://bibleproject.com/videos/warnings-about-religious-practices/",
-            "youtube": "wCo2LN7E6bo"
+            "youtube": "wCo2LN7E6bo",
+            "provider": "mux",
+            "playbackId": "qfikVrPuNDqwDyNhAK01buX6KtmE9v6h1G1JCOc0201VNo"
           },
           "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/15",
           "reading": [
@@ -1376,7 +1412,9 @@
           "video": {
             "title": "Chaos Dragon",
             "url": "https://bibleproject.com/videos/chaos-dragon/",
-            "youtube": "JN1thcowKXw"
+            "youtube": "JN1thcowKXw",
+            "provider": "mux",
+            "playbackId": "bVT6yHqsYk00bObQADiMsnaA01QM3sFHkbH8Cj300my7PY"
           },
           "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/16",
           "reading": [
@@ -1436,7 +1474,9 @@
           "video": {
             "title": "Jesus Fulfills the Law",
             "url": "https://bibleproject.com/videos/jesus-fulfills-the-law/",
-            "youtube": "KUil1m3P2iI"
+            "youtube": "KUil1m3P2iI",
+            "provider": "mux",
+            "playbackId": "OfeVSkoOnWcqajEKVZ901iTfWeWs3yN01Xr8bWzF004Yvc"
           },
           "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/17",
           "reading": [
@@ -1489,7 +1529,9 @@
           "video": {
             "title": "Agape/Love (Advent 4)",
             "url": "https://bibleproject.com/videos/agape-love/",
-            "youtube": "slyevQ1LW7A"
+            "youtube": "slyevQ1LW7A",
+            "provider": "mux",
+            "playbackId": "29r9CF5y4wUm6JRNoDILIcBKULUc01KiKbY4fIU9YV1A"
           },
           "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/18",
           "reading": [
@@ -1540,7 +1582,9 @@
           "video": {
             "title": "Redemption",
             "url": "https://bibleproject.com/videos/redemption/",
-            "youtube": "uib2G8GkG60"
+            "youtube": "uib2G8GkG60",
+            "provider": "mux",
+            "playbackId": "2Z8nzeFBm007rxd3Rh4fPZxIKthdoSo1M5WLyyZy4pWk"
           },
           "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/19",
           "reading": [
@@ -1592,7 +1636,9 @@
           "video": {
             "title": "Wealth and Worry",
             "url": "https://bibleproject.com/videos/wealth-and-worry/",
-            "youtube": "GpqOdHV3dmU"
+            "youtube": "GpqOdHV3dmU",
+            "provider": "mux",
+            "playbackId": "U01wiDwhj602YJPtukuNGOYLYOiWeaTHwFkI3hhEz5CJE"
           },
           "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/20",
           "reading": [
@@ -1648,7 +1694,9 @@
           "video": {
             "title": "Eternal Life",
             "url": "https://bibleproject.com/videos/eternal-life/",
-            "youtube": "uCOycIMyJZM"
+            "youtube": "uCOycIMyJZM",
+            "provider": "mux",
+            "playbackId": "LpCn027Ipl8F73NwHdGgl7NmaR8vZlUG3rmDDzt58HYw"
           },
           "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/21",
           "reading": [
@@ -1709,7 +1757,9 @@
           "video": {
             "title": "The Lord’s Prayer",
             "url": "https://bibleproject.com/videos/lords-prayer/",
-            "youtube": "3-YlqQfKkKk"
+            "youtube": "3-YlqQfKkKk",
+            "provider": "mux",
+            "playbackId": "Ok02b3DgDhHj1pqIXldDtkGTMrkrygpUlJpxaCzqq6K4"
           },
           "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/22",
           "reading": [
@@ -1756,7 +1806,9 @@
           "video": {
             "title": "John 1",
             "url": "https://bibleproject.com/videos/john-1/",
-            "youtube": "XgslCbXOOIE"
+            "youtube": "XgslCbXOOIE",
+            "provider": "mux",
+            "playbackId": "nG24qFQoj01ngclz255PHjmKR00O3PExZb9TjfrFeb01vM"
           },
           "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/23",
           "reading": [
@@ -1794,7 +1846,9 @@
           "video": {
             "title": "The Birth of Jesus: Luke 1-2",
             "url": "https://bibleproject.com/videos/gospel-luke-1/",
-            "youtube": "_OLezoUvOEQ"
+            "youtube": "_OLezoUvOEQ",
+            "provider": "mux",
+            "playbackId": "3Mix02RE1IeFBG3a02KMm7t1LxH2bIbeuuzd1xlMnmOCs"
           },
           "source": "https://www.bible.com/reading-plans/78620-bibleproject-the-road-to-christmas/day/24",
           "reading": [
