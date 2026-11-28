@@ -91,3 +91,21 @@
 .season .road-bottom-nav{margin-top:16px}
 @media(max-width:360px){.season .road-strip .road-marker{flex-basis:44px}.season .road-arrow{flex-basis:24px}.season .journey-map{gap:3px 0}.season .journey-map .road-marker svg{width:29px}}
 @media(prefers-reduced-motion:no-preference){.season .road-marker .stone-shape,.season .road-marker .bethlehem-shape{transition:fill .2s,stroke .2s}}
+
+/* Reserve outside gutters for the serpentine turns on narrow screens. */
+@media(max-width:540px){
+  .season .journey-map{padding-inline:15px;gap:4px 1px}
+  .season .journey-map .road-marker{width:100%;min-height:60px}
+  .season .journey-map .road-marker svg{width:min(29px,100%)}
+  .season .journey-path{overflow:visible}
+}
+/* Isolate Advent media from the sermon .video styles. */
+.season .advent-video{margin:8px 0}
+.season .advent-player{position:relative;aspect-ratio:16/9;width:100%;overflow:hidden;border:1px solid var(--line);border-radius:8px;background:var(--selected)}
+.season .advent-player iframe{display:block;width:100%;height:100%;border:0}
+.season .advent-play{display:grid;place-items:center;width:100%;height:100%;padding:0;border:0;background:var(--selected);position:relative;color:#fff;cursor:pointer}
+.season .advent-play img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85}
+.season .advent-play-icon{position:relative;display:grid;place-items:center;background:#c92020;border-radius:13px;width:64px;height:46px;font:24px/1 system-ui,sans-serif;padding-left:3px;box-shadow:0 2px 8px #0005}
+.season .advent-play-caption{position:absolute;bottom:9px;left:50%;transform:translateX(-50%);background:#000b;border-radius:5px;padding:3px 10px;white-space:nowrap;font-size:.8em}
+.season .advent-video-links{display:flex;flex-wrap:wrap;align-items:center;gap:5px;font-size:.83em;padding:8px 0 2px;line-height:1.45}
+.season .advent-video-links a{display:inline-block;padding:4px 0}

@@ -14,3 +14,6 @@ The calendar uses the existing theme index on each daily JSON entry. The four we
 
 ## Road to Christmas journey
 The daily Road to Christmas view uses a horizontally scrollable strip of 23 varied river-stone silhouettes and a Bethlehem star for the final day. The optional journey map uses the same icons in a four-row serpentine route. Marker links retain existing date permalinks; both completion controls update the strip, map and count in place without replacing the devotional or video. The JSON and localStorage keys are unchanged. The existing resource symbol value remains for data compatibility.
+
+## Video playback and responsive journey turns
+All 24 distinct BibleProject video IDs are mapped in the JSON (28 references including the four repeated weekly videos). Video sections show a thumbnail with a play button; pressing it loads the privacy-enhanced YouTube embed. External YouTube and BibleProject links are outside the player; an absent ID renders only the source link, never a black container. On screens up to 540px, the journey grid reserves side gutters and the SVG path is recalculated from actual marker locations on expand and resize; desktop retains its original geometry.

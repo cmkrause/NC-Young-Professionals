@@ -166,7 +166,7 @@ function validateSeason(data){
   return data.resources.every(r=>Array.isArray(r.days)&&r.days.length>0&&r.days.every(d=>hasText(d.reflection)&&(r.symbol!=='star'||hasText(d.reading))));
 }
 async function loadSeason(){
-  const path='./advent-2026.json?v=20261128-full-text';
+  const path='./advent-2026.json?v=20261128-video-ids';
   let result;
   try{result=await readJson(path,{cache:'no-store'});if(validateSeason(result))return result;}catch(e){console.warn('Advent data load failed; retrying',e)}
   result=await readJson(path+'&retry='+Date.now(),{cache:'reload'});
@@ -270,7 +270,26 @@ function scriptureAnchor(s){return '<a data-passage="'+esc(s.passage)+'"'+(selec
 function scriptureMarkup(d){return '<div class="scriptures">'+(d.scriptureGroups?d.scriptureGroups.map(g=>'<div>'+g.links.map(scriptureAnchor).join(', ')+' ↗</div>').join(''):d.scriptures.map(s=>'<div>'+scriptureAnchor(s)+' ↗</div>').join(''))+'</div>'}
 function aboutPlan(r){return r.introduction?.length?section('About this reading plan',(r.subtitle?'<p class="muted">'+esc(r.subtitle)+'</p>':'')+paragraphs(r.introduction)):''}
 function section(title,content,open=false){return '<details class="section" '+(open?'open':'')+'><summary>'+esc(title)+'</summary><div class="section-content">'+content+'</div></details>'}
-function video(v,label,weekly=false){if(!v)return '';return section(label||v.title+' · Video','<div class="video">'+(v.youtube?'<iframe loading="lazy" title="'+esc(v.title)+'" src="https://www.youtube-nocookie.com/embed/'+esc(v.youtube)+'" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>':'')+'<a class="source-link" href="'+esc(v.url)+'">Watch on BibleProject ↗</a></div>'+credit())}
+function video(v,label,weekly=false){
+  if(!v)return '';
+  const valid=/^[A-Za-z0-9_-]{11}$/.test(v.youtube||'');
+  const player=valid?'<div class="advent-player" data-youtube="'+esc(v.youtube)+'" data-video-title="'+esc(v.title)+'"><button type="button" class="advent-play" aria-label="Play '+esc(v.title)+'"><img src="https://i.ytimg.com/vi/'+esc(v.youtube)+'/hqdefault.jpg" alt="" loading="lazy"><span class="advent-play-icon" aria-hidden="true">▶</span><span class="advent-play-caption">Play video</span></button></div>':'';
+  const fallback='<div class="advent-video-links">'+(valid?'<a href="https://www.youtube.com/watch?v='+esc(v.youtube)+'" target="_blank" rel="noopener">Watch on YouTube ↗</a><span aria-hidden="true"> · </span>':'')+'<a href="'+esc(v.url)+'" target="_blank" rel="noopener">Watch on BibleProject ↗</a></div>';
+  return section(label||v.title+' · Video','<div class="advent-video">'+player+fallback+'</div>'+(weekly?'':credit()));
+}
+root.addEventListener('click',event=>{
+  const button=event.target.closest('.advent-play');
+  if(!button||!root.contains(button))return;
+  const player=button.closest('.advent-player'),id=player.dataset.youtube;
+  if(!/^[A-Za-z0-9_-]{11}$/.test(id))return;
+  const iframe=document.createElement('iframe');
+  iframe.title=player.dataset.videoTitle;
+  iframe.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&playsinline=1';
+  iframe.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+  iframe.allowFullscreen=true;
+  iframe.referrerPolicy='strict-origin-when-cross-origin';
+  player.replaceChildren(iframe);
+});
 // Deterministic, hand-drawn river-stone silhouettes; the same day has the same shape in both views.
 const stonePaths=[
  'M5 21 C3 14 9 8 19 7 C30 5 39 10 39 19 C39 27 30 31 20 31 C10 32 5 28 5 21Z',
@@ -296,6 +315,35 @@ function roadMarker(r,d,i,selected,map=false){
 }
 function roadMap(r,d){
   return '<div class="journey-endpoints"><span>December 1</span><span>Christmas Eve</span></div><nav class="journey-map" aria-label="All devotional days, winding journey"><svg class="journey-path" viewBox="0 0 600 400" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M50 50 H550 Q585 50 585 85 V115 Q585 150 550 150 H50 Q15 150 15 185 V215 Q15 250 50 250 H550 Q585 250 585 285 V315 Q585 350 550 350 H50" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 5" vector-effect="non-scaling-stroke" stroke-linecap="round"/></svg>'+r.days.map((x,i)=>roadMarker(r,x,i,d,true)).join('')+'</nav>';
+}
+function fitJourneyPath(){
+  const map=root.querySelector('.journey-map'),svg=map?.querySelector('.journey-path'),path=svg?.querySelector('path');
+  if(!map||!svg||!path||!map.clientWidth||!map.clientHeight)return;
+  if(!matchMedia('(max-width: 540px)').matches){
+    svg.setAttribute('viewBox','0 0 600 400');
+    path.setAttribute('d','M50 50 H550 Q585 50 585 85 V115 Q585 150 550 150 H50 Q15 150 15 185 V215 Q15 250 50 250 H550 Q585 250 585 285 V315 Q585 350 550 350 H50');
+    return;
+  }
+  const bounds=map.getBoundingClientRect();
+  const markers=[...map.querySelectorAll('.road-marker')].map(el=>{
+    const b=el.getBoundingClientRect();
+    return {x:b.left-bounds.left+b.width/2,y:b.top-bounds.top+b.height/2};
+  });
+  if(markers.length!==24)return;
+  const w=bounds.width,h=bounds.height;
+  const rows=Array.from({length:4},(_,i)=>({start:markers[i*6],end:markers[i*6+5]}));
+  const f=n=>Math.round(n*100)/100;
+  let d='M'+f(rows[0].start.x)+' '+f(rows[0].start.y);
+  for(let i=0;i<rows.length;i++){
+    const a=rows[i],next=rows[i+1];
+    if(!next){d+=' H'+f(a.end.x);break;}
+    const right=i%2===0,edge=right?w-3:3,sign=right?1:-1;
+    const radius=Math.min(10,Math.abs(edge-a.end.x)/2,(next.start.y-a.end.y)/2);
+    const corner=edge-sign*radius;
+    d+=' H'+f(corner)+' Q'+f(edge)+' '+f(a.end.y)+' '+f(edge)+' '+f(a.end.y+radius)+' V'+f(next.start.y-radius)+' Q'+f(edge)+' '+f(next.start.y)+' '+f(corner)+' '+f(next.start.y)+' H'+f(next.start.x);
+  }
+  svg.setAttribute('viewBox','0 0 '+w+' '+h);
+  path.setAttribute('d',d);
 }
 function roadCount(r){return done(r).size+' of '+r.days.length+' devotionals completed'}
 function roadNav(r,d){
@@ -340,8 +388,11 @@ function reading(r,d){
     panel.hidden=!panel.hidden;
     journey.setAttribute('aria-expanded',String(!panel.hidden));
     journey.querySelector('span').textContent=panel.hidden?'Show journey':'Hide journey';
+    if(!panel.hidden)requestAnimationFrame(fitJourneyPath);
   });
   requestAnimationFrame(centerRoadStrip);
+  if('ResizeObserver' in window)new ResizeObserver(fitJourneyPath).observe(root.querySelector('.journey-map'));
+  else window.addEventListener('resize',fitJourneyPath);
 }
 (async()=>{try{config=await loadSeason();await setupTranslations().catch(()=>{});const r=config.resources.find(x=>x.id===params.get('plan'));if(!r)landing();else if(r.id==='calendar')renderWeek(r,requestedWeek(r));else reading(r,r.days.find(x=>x.date===params.get('day'))||pick(r));}catch(e){root.innerHTML='<p>Advent readings could not load. Please refresh to retrieve the latest reading-plan data.</p><p><a href="./">Return to Advent</a> · <a href="https://bibleproject.com/guides/advent/">Original BibleProject resources</a></p>';console.error(e)}})();
 
