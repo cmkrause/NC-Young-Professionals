@@ -161,12 +161,12 @@ async function setupTranslations(){
 
 async function readJson(path,options){const response=await fetch(path,options);if(!response.ok)throw Error('Could not load '+path);return response.json()}
 function validateSeason(data){
-  if(!data||data.id!=='advent2026'||!Array.isArray(data.resources)||!data.resources.length)return false;
+  if(!data||data.id!=='advent-2026'||!Array.isArray(data.resources)||!data.resources.length)return false;
   const hasText=a=>Array.isArray(a)&&a.length>0&&a.every(p=>typeof p==='string'&&p.trim().length>0);
   return data.resources.every(r=>Array.isArray(r.days)&&r.days.length>0&&r.days.every(d=>hasText(d.reflection)&&(r.symbol!=='star'||hasText(d.reading))));
 }
 async function loadSeason(){
-  const path='./advent2026.json?v=1';
+  const path='./advent-2026.json?v=1';
   let result;
   try{result=await readJson(path,{cache:'no-store'});if(validateSeason(result))return result;}catch(e){console.warn('Advent data load failed; retrying',e)}
   result=await readJson(path+'&retry='+Date.now(),{cache:'reload'});
@@ -182,12 +182,12 @@ const href=(r,d)=>'./?plan='+encodeURIComponent(r.id)+(d?'&day='+encodeURICompon
 const get=(key)=>{try{return JSON.parse(localStorage.getItem(key)||'[]')}catch{return []}};
 let config,storageFailed=false;
 const key=r=>'gather-season:'+config.id+':'+r.id;
-// Preserve progress saved before the year-specific URL and ID migration.
+// Recover progress from the temporary unhyphenated storage key if needed.
 const completed=r=>{
   let saved=get(key(r));
   try{
     if(localStorage.getItem(key(r))===null){
-      const legacy=localStorage.getItem('gather-season:advent-2026:'+r.id);
+      const legacy=localStorage.getItem('gather-season:advent2026:'+r.id);
       if(legacy!==null){
         saved=JSON.parse(legacy);
         try{localStorage.setItem(key(r),JSON.stringify(saved))}catch{}

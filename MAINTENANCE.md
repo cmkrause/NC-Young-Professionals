@@ -70,4 +70,4 @@ Provider defaults to `youtube` so existing sermon files need no migration. For M
 
 ## Year-specific seasonal resources
 
-Advent 2026 lives at `/advent2026/` with `advent2026.json` and resource/season ID `advent2026`. The old `/advent/` entry point redirects with query string and hash intact; it is not a generic current-year route. Use separate folders and IDs for future seasons (e.g. `advent2027`). Progress migration for the 2026 legacy storage keys is documented in `advent2026/README.md`. The homepage index points at the year-specific URL.
+Advent 2026 lives at `/advent-2026/` with `advent-2026.json` and resource/season ID `advent-2026`. Use separate folders and IDs for future seasons (e.g. `advent-2027`). The homepage index points at the year-specific URL. No legacy page redirects are maintained.

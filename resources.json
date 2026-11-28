@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "resources": [
     {
-      "id": "advent2026",
+      "id": "advent-2026",
       "title": "Advent 2026",
       "description": "Daily readings & reflections",
-      "url": "./advent2026/",
+      "url": "./advent-2026/",
       "icon": "advent-candles",
       "visibleFrom": "2026-11-27",
       "visibleUntil": "2026-12-31",
