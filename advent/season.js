@@ -159,7 +159,20 @@ async function setupTranslations(){
   picker.hidden=false;
 }
 
-async function readJson(path){const response=await fetch(path);if(!response.ok)throw Error('Could not load '+path);return response.json()}
+async function readJson(path,options){const response=await fetch(path,options);if(!response.ok)throw Error('Could not load '+path);return response.json()}
+function validateSeason(data){
+  if(!data||data.id!=='advent-2026'||!Array.isArray(data.resources)||!data.resources.length)return false;
+  const hasText=a=>Array.isArray(a)&&a.length>0&&a.every(p=>typeof p==='string'&&p.trim().length>0);
+  return data.resources.every(r=>Array.isArray(r.days)&&r.days.length>0&&r.days.every(d=>hasText(d.reflection)&&(r.symbol!=='star'||hasText(d.reading))));
+}
+async function loadSeason(){
+  const path='./advent-2026.json?v=20261128-full-text';
+  let result;
+  try{result=await readJson(path,{cache:'no-store'});if(validateSeason(result))return result;}catch(e){console.warn('Advent data load failed; retrying',e)}
+  result=await readJson(path+'&retry='+Date.now(),{cache:'reload'});
+  if(!validateSeason(result))throw Error('The reading-plan data is out of date or incomplete.');
+  return result;
+}
 const root=document.getElementById('article');
 const params=new URLSearchParams(location.search);
 const localDate=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')};
@@ -194,4 +207,4 @@ section('Scripture Reading',scriptureMarkup(d),true)+
 section(isCalendar?'Reflection':'Reflection Exercises',paragraphs(d.reflection),true)+(isCalendar?video(theme.video):'')+(d.closing?'<div class="section">'+paragraphs(d.closing)+'</div>':'')+
 '<button class="action complete-button" id="complete" type="button" aria-pressed="'+isDone+'">'+(isDone?'✓ Completed · mark incomplete':(isCalendar?'Light this candle · mark complete':'Light this star · mark complete'))+'</button><div class="small-preview">'+calendar(r,d,true)+'</div><p><a href="'+esc(r.source)+'">Original reading plan ↗</a></p>'+foot();
 document.getElementById('complete').onclick=()=>{const open=root.querySelector('.calendar-toggle').open;toggle(r,d);reading(r,d);root.querySelector('.calendar-toggle').open=open;document.getElementById('complete').focus({preventScroll:true})}}
-(async()=>{try{config=await readJson('./advent-2026.json');await setupTranslations().catch(()=>{});const r=config.resources.find(x=>x.id===params.get('plan'));if(!r)landing();else reading(r,r.days.find(x=>x.date===params.get('day'))||pick(r));}catch(e){root.innerHTML='<p>Advent resources could not load. Please refresh.</p>';console.error(e)}})();
+(async()=>{try{config=await loadSeason();await setupTranslations().catch(()=>{});const r=config.resources.find(x=>x.id===params.get('plan'));if(!r)landing();else reading(r,r.days.find(x=>x.date===params.get('day'))||pick(r));}catch(e){root.innerHTML='<p>Advent readings could not load. Please refresh to retrieve the latest reading-plan data.</p><p><a href="./">Return to Advent</a> · <a href="https://bibleproject.com/guides/advent/">Original BibleProject resources</a></p>';console.error(e)}})();
