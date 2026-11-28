@@ -67,3 +67,7 @@ Provider defaults to `youtube` so existing sermon files need no migration. For M
 ## Seasonal resource banners
 
 `resources.json` (schemaVersion 1) controls the optional links below the sermon site's sticky header. `resources.js` loads this independent index without blocking sermon rendering. Each entry has a stable `id`, `title`, `description`, `url`, `icon`, `published`, and optional inclusive local-date boundaries `visibleFrom`/`visibleUntil` in YYYY-MM-DD format. Set `published: false` to hide an entry immediately on the next load; remove date boundaries for an evergreen resource. Multiple active entries are displayed in JSON order. The `advent-candles` icon accepts four `candles` records with `title`, `start`, and `color`; their start dates match the corresponding seasonal JSON. Other icons use a generic book symbol. The 2026 banner is visible November 27 through December 31 inclusive and its removal does not remove the linked resource or its completion history. Keep asset versions current when changing the script or stylesheet. The Advent pages' existing indexing settings are unchanged.
+
+## Year-specific seasonal resources
+
+Advent 2026 lives at `/advent2026/` with `advent2026.json` and resource/season ID `advent2026`. The old `/advent/` entry point redirects with query string and hash intact; it is not a generic current-year route. Use separate folders and IDs for future seasons (e.g. `advent2027`). Progress migration for the 2026 legacy storage keys is documented in `advent2026/README.md`. The homepage index points at the year-specific URL.
