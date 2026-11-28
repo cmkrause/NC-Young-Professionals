@@ -302,35 +302,35 @@ function roadMarker(r,d,i,selected,map=false){
   return '<a class="road-marker'+(lit?' is-complete':'')+(today?' is-today':'')+(last?' is-destination':'')+'" href="'+href(r,d)+'" data-road-date="'+d.date+'" aria-label="'+esc(roadLabel(r,d,i))+'"'+(current?' aria-current="page"':'')+(map?' style="grid-column:'+(col+1)+';grid-row:'+(row+1)+'"':'')+'>'+roadSymbol(i,r.days.length)+'<span class="road-number">'+(i+1)+'</span></a>';
 }
 function roadMap(r,d){
-  return '<div class="journey-endpoints"><span>December 1</span><span>Christmas Eve</span></div><nav class="journey-map" aria-label="All devotional days, winding journey"><svg class="journey-path" viewBox="0 0 600 400" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M50 50 H550 Q585 50 585 85 V115 Q585 150 550 150 H50 Q15 150 15 185 V215 Q15 250 50 250 H550 Q585 250 585 285 V315 Q585 350 550 350 H50" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 5" vector-effect="non-scaling-stroke" stroke-linecap="round"/></svg>'+r.days.map((x,i)=>roadMarker(r,x,i,d,true)).join('')+'</nav>';
+  return '<div class="journey-endpoints"><span>December 1</span><span>Christmas Eve</span></div><nav class="journey-map" aria-label="All devotional days, winding journey"><svg class="journey-path" viewBox="0 0 600 400" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 5" vector-effect="non-scaling-stroke" stroke-linecap="round"/></svg>'+r.days.map((x,i)=>roadMarker(r,x,i,d,true)).join('')+'</nav>';
+}
+// All viewport sizes use the measured grid, not a separate mobile drawing.
+function journeyGeometry(width,height,markers){
+  if(!(width>0&&height>0)||markers.length!==24)return '';
+  const f=n=>Math.round(n*100)/100;
+  const rows=Array.from({length:4},(_,i)=>({start:markers[i*6],end:markers[i*6+5]}));
+  let d='M'+f(rows[0].start.x)+' '+f(rows[0].start.y);
+  for(let i=0;i<rows.length;i++){
+    const a=rows[i],next=rows[i+1];
+    if(!next){d+=' H'+f(a.end.x);break;}
+    const right=i%2===0,edge=right?width-3:3,sign=right?1:-1;
+    const radius=Math.min(14,Math.abs(edge-a.end.x)/2,(next.start.y-a.end.y)/2);
+    const corner=edge-sign*radius;
+    d+=' H'+f(corner)+' Q'+f(edge)+' '+f(a.end.y)+' '+f(edge)+' '+f(a.end.y+radius)+' V'+f(next.start.y-radius)+' Q'+f(edge)+' '+f(next.start.y)+' '+f(corner)+' '+f(next.start.y)+' H'+f(next.start.x);
+  }
+  return d;
 }
 function fitJourneyPath(){
   const map=root.querySelector('.journey-map'),svg=map?.querySelector('.journey-path'),path=svg?.querySelector('path');
   if(!map||!svg||!path||!map.clientWidth||!map.clientHeight)return;
-  if(!matchMedia('(max-width: 540px)').matches){
-    svg.setAttribute('viewBox','0 0 600 400');
-    path.setAttribute('d','M50 50 H550 Q585 50 585 85 V115 Q585 150 550 150 H50 Q15 150 15 185 V215 Q15 250 50 250 H550 Q585 250 585 285 V315 Q585 350 550 350 H50');
-    return;
-  }
   const bounds=map.getBoundingClientRect();
   const markers=[...map.querySelectorAll('.road-marker')].map(el=>{
     const b=el.getBoundingClientRect();
     return {x:b.left-bounds.left+b.width/2,y:b.top-bounds.top+b.height/2};
   });
-  if(markers.length!==24)return;
-  const w=bounds.width,h=bounds.height;
-  const rows=Array.from({length:4},(_,i)=>({start:markers[i*6],end:markers[i*6+5]}));
-  const f=n=>Math.round(n*100)/100;
-  let d='M'+f(rows[0].start.x)+' '+f(rows[0].start.y);
-  for(let i=0;i<rows.length;i++){
-    const a=rows[i],next=rows[i+1];
-    if(!next){d+=' H'+f(a.end.x);break;}
-    const right=i%2===0,edge=right?w-3:3,sign=right?1:-1;
-    const radius=Math.min(10,Math.abs(edge-a.end.x)/2,(next.start.y-a.end.y)/2);
-    const corner=edge-sign*radius;
-    d+=' H'+f(corner)+' Q'+f(edge)+' '+f(a.end.y)+' '+f(edge)+' '+f(a.end.y+radius)+' V'+f(next.start.y-radius)+' Q'+f(edge)+' '+f(next.start.y)+' '+f(corner)+' '+f(next.start.y)+' H'+f(next.start.x);
-  }
-  svg.setAttribute('viewBox','0 0 '+w+' '+h);
+  const d=journeyGeometry(bounds.width,bounds.height,markers);
+  if(!d)return;
+  svg.setAttribute('viewBox','0 0 '+bounds.width+' '+bounds.height);
   path.setAttribute('d',d);
 }
 function roadCount(r){return done(r).size+' of '+r.days.length+' devotionals completed'}

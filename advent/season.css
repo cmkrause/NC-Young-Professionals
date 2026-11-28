@@ -81,21 +81,22 @@
 .season #journey-panel{border:1px solid var(--line);border-radius:12px;margin:10px 0;padding:9px 5px 7px}
 .season #journey-panel[hidden]{display:none}
 .season .journey-endpoints{display:flex;justify-content:space-between;color:var(--muted);font-size:.73em;padding:0 5px 4px}
-.season .journey-map{position:relative;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:repeat(4,minmax(58px,auto));gap:4px 2px;padding:0}
+.season .journey-map{position:relative;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:repeat(4,minmax(60px,auto));gap:4px 2px;padding-inline:clamp(12px,2.5vw,18px)}
 .season .journey-path{position:absolute;inset:0;width:100%;height:100%;color:var(--muted);opacity:.55;pointer-events:none}
-.season .journey-map .road-marker{z-index:1;justify-self:center;width:min(100%,54px);padding:2px 0}
+/* The full cell is tappable; only its narrower inner mask covers the dashed path.
+   This guarantees visible connectors even when six cells fill a small screen. */
+.season .journey-map .road-marker{z-index:1;isolation:isolate;justify-self:stretch;width:100%;padding:2px 0;background:transparent;border-color:transparent;box-shadow:none}
+.season .journey-map .road-marker::before{content:"";position:absolute;z-index:-1;inset-block:0;left:50%;transform:translateX(-50%);width:min(54px,calc(100% - 14px));border-radius:8px;background:var(--bg);pointer-events:none}
+.season .journey-map .road-marker[aria-current=page]::before{background:var(--selected);box-shadow:inset 0 0 0 2px var(--purple)}
+.season .journey-map .road-marker:hover::before{background:var(--selected)}
+.season .journey-map .road-marker svg{width:min(35px,calc(100% - 6px))}
+.season .journey-map .road-marker .bethlehem-art{width:min(35px,calc(100% - 6px))}
+.season .journey-map .road-marker:focus-visible{outline-offset:-1px}
 .season .road-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;border-top:1px solid var(--line);padding:12px 0 15px}
 .season .road-heading-copy{min-width:0}
 .season .road-heading-copy p{margin:0 0 4px}
 .season .road-heading h2{font-size:1.38em;overflow-wrap:break-word}
 .season .road-bottom-nav{margin-top:16px}
-@media(max-width:360px){.season .road-strip .road-marker{flex-basis:44px}.season .road-arrow{flex-basis:24px}.season .journey-map{gap:3px 0}.season .journey-map .road-marker svg{width:29px}}
+@media(max-width:360px){.season .road-strip .road-marker{flex-basis:44px}.season .road-arrow{flex-basis:24px}}
 @media(prefers-reduced-motion:no-preference){.season .road-marker .stone-shape,.season .road-marker .bethlehem-shape{transition:fill .2s,stroke .2s}}
 
-/* Reserve outside gutters for the serpentine turns on narrow screens. */
-@media(max-width:540px){
-  .season .journey-map{padding-inline:15px;gap:4px 1px}
-  .season .journey-map .road-marker{width:100%;min-height:60px}
-  .season .journey-map .road-marker svg{width:min(29px,100%)}
-  .season .journey-path{overflow:visible}
-}
