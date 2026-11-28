@@ -1,2 +1,53 @@
 .season{padding:20px 0 40px;--purple:#79578c;--rose:#a65479;--gold:#d9952d}.dark .season{--purple:#bda1cf;--rose:#e2a0ba;--gold:#ffc671}.season h1,.season h2,.season h3{margin:0;line-height:1.25}.season p{margin:.5em 0}.season .muted{color:var(--muted);font-size:.88em}.season .hero{text-align:center;padding:12px 0 22px}.season .hero h1{font-size:1.8em}.season .hero-art{display:flex;justify-content:center;gap:12px;align-items:end;margin:0 auto 15px;max-width:320px}.season .hero-candle{display:grid;justify-items:center;flex:1;min-width:0;font-size:.72em}.season .hero-candle svg{width:54px;height:94px;max-width:100%}.season .candle-body{fill:var(--purple)}.season .rose .candle-body{fill:var(--rose)}.season .unlit .candle-body{fill:var(--muted);opacity:.42}.season .flame{fill:var(--gold);transform-origin:50% 35%;animation:ignite .4s ease-out}.season .inner-flame{fill:#fff0b5}.season .wick{stroke:var(--muted);stroke-width:1.8}.season .card{border:1px solid var(--line);border-radius:15px;padding:16px;margin:0 0 14px}.season .card h2{font-size:1.22em}.season .progress{display:flex;justify-content:space-between;gap:8px;font-size:.83em;color:var(--muted);margin-top:12px}.season progress{display:block;appearance:none;width:100%;height:6px;border:none;border-radius:20px;overflow:hidden;background:var(--selected);margin:6px 0 12px;accent-color:var(--purple)}.season progress::-webkit-progress-bar{background:var(--selected)}.season progress::-webkit-progress-value{background:var(--purple)}.season progress::-moz-progress-bar{background:var(--purple)}.season .action{display:block;padding:11px 12px;background:var(--selected);border:1px solid var(--line);border-radius:9px;text-decoration:none;font-weight:600;text-align:center;width:100%;min-height:44px}.season .action:hover{border-color:var(--purple)}.season .calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}.season .star-grid{grid-template-columns:repeat(6,minmax(0,1fr))}.season .tile{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;min-height:54px;border:1px solid var(--line);border-radius:8px;padding:4px 1px;text-decoration:none;line-height:1.1;font-size:.8em}.season .tile svg{width:26px;height:36px}.season .tile[aria-current=date]{outline:2px solid var(--purple);outline-offset:-2px}.season .tile.selected{background:var(--selected)}.season .tile.complete{border-color:var(--purple)}.season .star{fill:none;stroke:var(--muted);stroke-width:1.2}.season .complete .star{fill:var(--gold);stroke:var(--gold)}.season .week-label{font-size:.84em;font-weight:600;margin:10px 0 5px}.season .day-nav{display:flex;align-items:center;gap:8px;justify-content:space-between;text-align:center;margin:20px 0}.season .day-nav a{font-size:1.5em;text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:3px 12px;min-width:44px}.season .day-nav span.edge{width:44px}.season .day-nav h2{font-size:1.16em}.season .section{border-top:1px solid var(--line);padding:12px 0;margin:0}.season .section summary{cursor:pointer;font-weight:600}.season .section-content{padding:8px 0}.season .scriptures{display:flex;flex-direction:column;gap:10px;margin:8px 0}.season .scriptures a{width:fit-content}.season .video iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:8px;display:block}.season .video{margin:8px 0}.season .foot{text-align:center;font-size:.78em;color:var(--muted);margin:22px 0}.season .breadcrumb{display:flex;gap:10px;flex-wrap:wrap;font-size:.88em;margin-bottom:16px}.season .calendar-toggle{margin:14px 0}.season .calendar-toggle summary{cursor:pointer;font-weight:600}.season .notice{font-size:.82em;color:var(--muted)}.season .complete-button{margin-top:12px}.season .complete-button[aria-pressed=true]{border-color:var(--purple)}.season .small-preview{margin:12px 0}.season .star-grid .tile{min-height:50px}.season .star-grid .tile svg{height:24px}.season .weekday{text-align:center;color:var(--muted);font-size:.72em}.season .source-link{display:inline-block;padding:8px 0}.season .future{color:var(--muted)}@keyframes ignite{from{opacity:.15;transform:scale(.7)}to{opacity:1;transform:scale(1)}}@media(prefers-reduced-motion:reduce){.season .flame{animation:none}}@media(max-width:400px){.season .card{padding:12px}.season .tile svg{width:23px;height:31px}.season .hero-art{gap:7px}.season .tile{min-height:50px}}
 .season .devotional-paragraph{margin:0 0 1em;line-height:1.65;overflow-wrap:break-word}.season .devotional-paragraph:last-child{margin-bottom:0}.season .section-content .devotional-paragraph:first-child{margin-top:.35em}.season .scriptures>div{line-height:1.5}.season .scriptures a{display:inline}.season .card .section{margin:8px 0 0;padding:9px 0 0}.season .card .section summary{font-size:.86em}
+
+/* Compact overview and weekly calendar */
+.season .compact-hero{padding:4px 0 14px}
+.season .compact-hero .hero-art{margin-bottom:7px;max-width:260px}
+.season .compact-hero .hero-candle svg{height:72px;width:44px}
+.season .compact-hero p{margin:.25em 0}
+.season .compact-card{padding:14px;margin-bottom:12px}
+.season .compact-card>p{margin:.2em 0 .6em}
+.season .resource-link{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding:10px 0 7px;color:var(--text);text-decoration:none;min-height:44px;line-height:1.35}
+.season .resource-link>span:first-child{min-width:0;overflow-wrap:anywhere}
+.season .resource-count{display:block;font-size:.8em}
+.season .resource-chevron{font-size:1.7em;line-height:1;color:var(--muted)}
+.season .compact-card progress{margin:7px 0 2px}
+.season .plan-introductions{padding:8px 0}
+.season .plan-introductions h3:not(:first-child){margin-top:1.1em}
+.season .weekly-title{font-size:1.45em}
+.season .week-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin:14px 0}
+.season .week-tabs a{display:flex;flex-direction:column;justify-content:center;align-items:center;min-width:0;min-height:53px;padding:7px 2px;line-height:1.25;text-decoration:none;color:var(--text);border:1px solid var(--line);border-radius:8px;text-align:center;overflow-wrap:anywhere}
+.season .week-tabs a span{font-size:.7em;color:var(--muted)}
+.season .week-tabs a strong{font-size:.88em;font-weight:600}
+.season .week-tabs a[aria-current=page]{border-color:var(--purple);box-shadow:inset 0 0 0 1px var(--purple);background:var(--selected)}
+.season .weekly-hero{text-align:center;padding:10px 0 14px}
+.season .weekly-hero svg{display:block;width:54px;height:86px;margin:0 auto 6px}
+.season .weekly-hero h2{font-size:1.7em}
+.season .weekly-hero p{margin:.2em 0}
+.season .weekly-progress{padding:10px 0 13px}
+.season #weekly-count{display:block;font-size:.88em;font-weight:600;margin-bottom:7px}
+.season .week-candles{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px}
+.season .week-candle{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;min-height:66px;padding:4px 0;text-decoration:none;color:var(--text);border:1px solid transparent;border-radius:8px;line-height:1.2;gap:2px}
+.season .week-candle[aria-current=date]{border-color:var(--purple);background:var(--selected)}
+.season .week-candle:hover{background:var(--selected)}
+.season .candle-art{display:block;line-height:0}
+.season .candle-art svg{width:28px;height:43px;max-width:100%}
+.season .candle-date{font-size:.75em;font-weight:500}
+.season .compact-card .week-candle{min-height:48px;padding:3px 0}
+.season .compact-card .candle-art svg{width:23px;height:34px}
+.season .weekly-reading{border-top:1px solid var(--line);padding:13px 0 16px;scroll-margin-top:calc(var(--season-header-height,85px) + 12px)}
+.season .weekly-reading.is-today{border-left:3px solid var(--purple);padding-left:10px;background:color-mix(in srgb,var(--purple) 5%,transparent)}
+.season .reading-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}
+.season .reading-heading h3{font-size:.9em;color:var(--muted);line-height:1.35;font-weight:600}
+.season .today-label{color:var(--purple)}
+.season .reading-complete{flex:0 0 44px;display:grid;place-items:center;width:44px;height:44px;background:transparent;border:0;border-radius:50%;padding:6px;color:var(--muted)}
+.season .reading-complete[aria-pressed=true]{color:var(--purple)}
+.season .reading-complete:hover{background:var(--selected)}
+.season .reading-complete svg{width:28px;height:28px;display:block}
+.season .weekly-scripture .scriptures{margin:0 0 6px;font-weight:600}
+.season .weekly-reflection .devotional-paragraph{margin:0;line-height:1.55}
+.season .week-bottom-nav{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding:10px 0;gap:10px}
+.season .week-bottom-nav a{padding:8px 0;min-height:44px;text-decoration:none;font-weight:600}
+.season .original-week{text-align:center;font-size:.82em}
+@media(max-width:360px){.season .week-tabs{gap:3px}.season .week-tabs a{padding:5px 1px}.season .candle-art svg{width:23px;height:37px}.season .week-candles{gap:1px}}
