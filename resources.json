@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "resources": [
+    {
+      "id": "advent-2026",
+      "title": "Advent 2026",
+      "description": "Daily readings & reflections",
+      "url": "./advent/",
+      "icon": "advent-candles",
+      "visibleFrom": "2026-11-27",
+      "visibleUntil": "2026-12-31",
+      "published": true,
+      "candles": [
+        {
+          "title": "Hope",
+          "start": "2026-11-29",
+          "color": "purple"
+        },
+        {
+          "title": "Peace",
+          "start": "2026-12-06",
+          "color": "purple"
+        },
+        {
+          "title": "Joy",
+          "start": "2026-12-13",
+          "color": "rose"
+        },
+        {
+          "title": "Love",
+          "start": "2026-12-20",
+          "color": "purple"
+        }
+      ]
+    }
+  ]
+}
