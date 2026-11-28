@@ -276,7 +276,7 @@ function renderWeek(r,i){
   root.innerHTML='<nav class="breadcrumb" aria-label="Advent navigation"><a href="./">‹ '+esc(config.title)+'</a></nav><h1 class="weekly-title">'+esc(r.title)+'</h1>'+
   '<nav class="week-tabs" aria-label="Advent weeks">'+config.themes.map((w,j)=>'<a href="'+weekHref(j)+'"'+(j===i?' aria-current="page"':'')+'><span>Week '+(j+1)+'</span><strong>'+esc(w.title)+'</strong></a>').join('')+'</nav>'+
   '<div class="weekly-hero">'+candle(t.start<=today,t.color==='rose')+'<h2>'+esc(t.title)+'</h2><p class="muted">'+esc(dateRange(days))+'</p></div>'+
-  video(t.video,t.title+' · BibleProject',true)+
+  video(t.video,true)+
   '<div class="weekly-progress"><span id="weekly-count" role="status">'+weekCount(r,i)+'</span>'+weeklyCandles(r,i)+'</div>'+
   '<div class="weekly-readings">'+days.map(d=>{
     const lit=done(r).has(d.date),isToday=d.date===today;
@@ -296,13 +296,14 @@ function scriptureAnchor(s){return '<a data-passage="'+esc(s.passage)+'"'+(selec
 function scriptureMarkup(d){return '<div class="scriptures">'+(d.scriptureGroups?d.scriptureGroups.map(g=>'<div>'+g.links.map(scriptureAnchor).join(', ')+' ↗</div>').join(''):d.scriptures.map(s=>'<div>'+scriptureAnchor(s)+' ↗</div>').join(''))+'</div>'}
 function aboutPlan(r){return r.introduction?.length?section('About this reading plan',(r.subtitle?'<p class="muted">'+esc(r.subtitle)+'</p>':'')+paragraphs(r.introduction)):''}
 function section(title,content,open=false){return '<details class="section" '+(open?'open':'')+'><summary>'+esc(title)+'</summary><div class="section-content">'+content+'</div></details>'}
-function video(v,label,weekly=false){
+function video(v,weekly=false){
   if(!v)return '';
-  return section(label||v.title+' · Video',NCVideoPlayer.render({
+  const icon='<svg class="video-heading-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5l6 3.5-6 3.5z"/></svg>';
+  return '<details class="section video-section"><summary><span class="video-heading">'+icon+'<span class="video-heading-title">'+esc(v.title)+'</span></span></summary><div class="section-content">'+NCVideoPlayer.render({
     provider:v.provider||'youtube',id:v.provider==='mux'?v.playbackId:v.youtube,youtubeId:v.youtube,title:v.title,
     sourceUrl:v.url,sourceLabel:'Watch on BibleProject ↗',
     youtubeLabel:'Watch on YouTube ↗'
-  })+(weekly?'':credit()));
+  })+(weekly?'':credit())+'</div></details>';
 }
 // Deterministic, hand-drawn river-stone silhouettes; the same day has the same shape in both views.
 const stonePaths=[
