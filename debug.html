@@ -153,6 +153,8 @@ async function start(){
   }
   files.set('./site.js','site.js · JavaScript');
   files.set('./site.css','site.css · CSS');
+  files.set('./video-player.js','video-player.js · Shared JavaScript');
+  files.set('./video-player.css','video-player.css · Shared CSS');
   for(const [path,label] of files)picker.add(new Option(label,path));
   picker.disabled=false;
   showFile();

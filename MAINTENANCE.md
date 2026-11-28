@@ -57,3 +57,7 @@ To add a superscript slide reference after text in a question, use a separate pa
 
 ## Reading settings
 The sticky header opens a native modal dialog (bottom sheet on phones). Theme, text size, Bible link translation, and font choices save locally on each device. Fonts load only when used. Atkinson is the default; bundled OpenDyslexic, Lexend, and Andika files and their OFL licenses are in `fonts`. Sources: https://github.com/antijingoist/opendyslexic and https://github.com/google/fonts/tree/main/ofl (lexend, andika). Lexend uses browser-synthesized italics; the other options provide native italic styles.
+
+## Shared video player
+
+`video-player.js` and `video-player.css` implement a reusable, dependency-free YouTube facade for all sermon and seasonal reading pages. Load the shared CSS and deferred script before the relevant page script. Render with `NCVideoPlayer.render({id, title, youtubeLabel, sourceUrl, sourceLabel})` (source options are optional). The facade reserves 16:9 space and loads only a lazy thumbnail at first; a user click creates the privacy-enhanced iframe with inline playback, fullscreen and autoplay requested. Direct source links remain outside the player. Missing IDs never create an empty video rectangle. Existing sermon JSON and archive thumbnail behavior are unchanged. Update the asset version strings in both HTML entry points when editing shared player files.

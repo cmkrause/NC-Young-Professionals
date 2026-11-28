@@ -546,21 +546,14 @@ function guideHeader(guide, isDraft) {
 }
 
 function sermonRecording(guide, isDraft) {
-  if (!/^[A-Za-z0-9_-]{11}$/.test(guide.videoId || '')) {
+  if (!NCVideoPlayer.validId(guide.videoId)) {
     return isDraft ? '<p>Recording to be added.</p>' : '';
   }
-
-  const videoId = esc(guide.videoId);
-  return `
-    <div class="video">
-      <iframe src="https://www.youtube-nocookie.com/embed/${videoId}"
-        title="Sermon for ${esc(date(guide.date))}"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    </div>
-    <p class="video-link">
-      <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener">Open sermon on YouTube</a>
-    </p>`;
+  return NCVideoPlayer.render({
+    id: guide.videoId,
+    title: 'Sermon for ' + date(guide.date),
+    youtubeLabel: 'Open sermon on YouTube'
+  });
 }
 
 function scriptureLine(line) {

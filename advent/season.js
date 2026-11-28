@@ -272,24 +272,12 @@ function aboutPlan(r){return r.introduction?.length?section('About this reading 
 function section(title,content,open=false){return '<details class="section" '+(open?'open':'')+'><summary>'+esc(title)+'</summary><div class="section-content">'+content+'</div></details>'}
 function video(v,label,weekly=false){
   if(!v)return '';
-  const valid=/^[A-Za-z0-9_-]{11}$/.test(v.youtube||'');
-  const player=valid?'<div class="advent-player" data-youtube="'+esc(v.youtube)+'" data-video-title="'+esc(v.title)+'"><button type="button" class="advent-play" aria-label="Play '+esc(v.title)+'"><img src="https://i.ytimg.com/vi/'+esc(v.youtube)+'/hqdefault.jpg" alt="" loading="lazy"><span class="advent-play-icon" aria-hidden="true">▶</span><span class="advent-play-caption">Play video</span></button></div>':'';
-  const fallback='<div class="advent-video-links">'+(valid?'<a href="https://www.youtube.com/watch?v='+esc(v.youtube)+'" target="_blank" rel="noopener">Watch on YouTube ↗</a><span aria-hidden="true"> · </span>':'')+'<a href="'+esc(v.url)+'" target="_blank" rel="noopener">Watch on BibleProject ↗</a></div>';
-  return section(label||v.title+' · Video','<div class="advent-video">'+player+fallback+'</div>'+(weekly?'':credit()));
+  return section(label||v.title+' · Video',NCVideoPlayer.render({
+    id:v.youtube,title:v.title,
+    sourceUrl:v.url,sourceLabel:'Watch on BibleProject ↗',
+    youtubeLabel:'Watch on YouTube ↗'
+  })+(weekly?'':credit()));
 }
-root.addEventListener('click',event=>{
-  const button=event.target.closest('.advent-play');
-  if(!button||!root.contains(button))return;
-  const player=button.closest('.advent-player'),id=player.dataset.youtube;
-  if(!/^[A-Za-z0-9_-]{11}$/.test(id))return;
-  const iframe=document.createElement('iframe');
-  iframe.title=player.dataset.videoTitle;
-  iframe.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&playsinline=1';
-  iframe.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-  iframe.allowFullscreen=true;
-  iframe.referrerPolicy='strict-origin-when-cross-origin';
-  player.replaceChildren(iframe);
-});
 // Deterministic, hand-drawn river-stone silhouettes; the same day has the same shape in both views.
 const stonePaths=[
  'M5 21 C3 14 9 8 19 7 C30 5 39 10 39 19 C39 27 30 31 20 31 C10 32 5 28 5 21Z',

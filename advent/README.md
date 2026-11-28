@@ -17,3 +17,6 @@ The daily Road to Christmas view uses a horizontally scrollable strip of 23 vari
 
 ## Video playback and responsive journey turns
 All 24 distinct BibleProject video IDs are mapped in the JSON (28 references including the four repeated weekly videos). Video sections show a thumbnail with a play button; pressing it loads the privacy-enhanced YouTube embed. External YouTube and BibleProject links are outside the player; an absent ID renders only the source link, never a black container. On screens up to 540px, the journey grid reserves side gutters and the SVG path is recalculated from actual marker locations on expand and resize; desktop retains its original geometry.
+
+## Shared player
+Advent now uses the root `video-player.js` and `video-player.css` via relative paths. The renderer supplies the BibleProject title, YouTube ID and original source link. Video markup, deferred iframe activation, and player styling are maintained in the shared component rather than in seasonal files.
